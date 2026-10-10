@@ -1,0 +1,121 @@
+/* Tekscaleup brand palette. Keep this stylesheet after the template styles. */
+:root {
+  --brand-blue: #3746ff;
+  --brand-blue-hover: #2936db;
+  --brand-green: #00dc92;
+  --brand-ink: #0e0f11;
+  --brand-highlight: #8290ff;
+  --tp-common-red: var(--brand-blue);
+  --tp-common-red-2: var(--brand-blue);
+  --tp-common-red-3: var(--brand-blue);
+  --tp-common-blue: var(--brand-blue);
+  --tp-theme-1: var(--brand-blue);
+  --tp-theme-green: var(--brand-green);
+  --tp-theme-pink: var(--brand-highlight);
+  --tp-theme-yellow: var(--brand-green);
+  --tp-common-yellow: var(--brand-green);
+  --tp-common-yellow-1: var(--brand-green);
+  --tp-common-yellow-green: var(--brand-green);
+  --tp-common-green-light: var(--brand-green);
+  --tp-common-green-regular: var(--brand-green);
+  --tp-common-green-1: var(--brand-green);
+  --tp-common-paste: var(--brand-green);
+}
+
+::selection {
+  color: var(--brand-ink);
+  background: var(--brand-green);
+}
+
+.tp-header-logo img,
+.tp-offcanvas-logo img {
+  width: 180px;
+  max-width: 100%;
+  height: auto;
+}
+
+.tp-copyright-style-6 .tp-copyright-big-text {
+  line-height: 1;
+  margin-bottom: 40px;
+}
+
+.brand-footer-logo {
+  display: inline-block;
+  width: min(100%, 900px);
+}
+
+.brand-footer-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Both copies of the animated button need the same hover treatment. */
+.tp-btn-black.btn-red-bg .tp-btn-black-text,
+.tp-btn-black.btn-red-bg .tp-btn-black-circle {
+  transition: background-color 0.3s ease, transform 0.9s cubic-bezier(0.135, 0.9, 0.15, 1);
+}
+
+.tp-btn-black.btn-red-bg:hover .tp-btn-black-text,
+.tp-btn-black.btn-red-bg:hover .tp-btn-black-circle,
+.tp-btn-black.btn-red-bg:focus-visible .tp-btn-black-text,
+.tp-btn-black.btn-red-bg:focus-visible .tp-btn-black-circle {
+  background-color: var(--brand-blue-hover);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--brand-green);
+  outline-offset: 5px;
+}
+
+.back-to-top-btn,
+.tp-footer-style-6 .tp-footer-widget-social a:hover,
+.agntix-dark .tp-service-category span:hover,
+.agntix-dark .tp-project-category span:hover {
+  color: var(--brand-ink);
+  background-color: var(--brand-green);
+  border-color: var(--brand-green);
+}
+
+.back-to-top-btn:hover {
+  color: #fff;
+  background-color: var(--brand-blue);
+}
+
+.tp-header-dropdown nav > ul > li:hover > a,
+.tp-header-dropdown nav > ul > li .tp-submenu li:hover > a,
+.tp-megamenu-list ul li:hover > a,
+.tp-mobile-menu ul li > a:hover,
+.tp-footer-style-6 .tp-footer-widget-info a:hover,
+.tp-copyright-style-6 .tp-copyright-right a:hover {
+  color: var(--brand-green);
+}
+
+.tp-footer-style-6 .tp-footer-widget-menu ul li a:hover {
+  color: var(--brand-ink);
+  background-color: var(--brand-green);
+}
+
+.tp-megamenu-list ul li a span.hot,
+.tp-megamenu-list ul li a span.new {
+  color: var(--brand-green);
+}
+
+.tp-megamenu-list ul li a span.pop {
+  color: var(--brand-highlight);
+}
+
+@media (max-width: 767px) {
+  .tp-header-logo img,
+  .tp-offcanvas-logo img {
+    width: 160px;
+  }
+
+  .tp-copyright-style-6 .tp-copyright-big-text {
+    margin-bottom: 28px;
+  }
+}

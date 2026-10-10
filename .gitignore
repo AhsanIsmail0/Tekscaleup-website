@@ -1,0 +1,26 @@
+# Local restore archives and review output
+/backups/
+/output/
+/assets/qa/
+/assets/img/people/originals/
+
+# Keep reproducible site sources; exclude other working files.
+/tmp/*
+!/tmp/apply_template_copy.py
+!/tmp/create_global_map.py
+!/tmp/global-map-section.html
+!/tmp/index_4.before-content.html
+!/tmp/map-source/
+!/tmp/preview_server.py
+!/tmp/verify_template.py
+
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+
+# These restore commands require local archives excluded above.
+/UNDO-*.ps1

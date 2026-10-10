@@ -1,0 +1,165 @@
+/* Content integration only. The original main.css owns the layout and buttons. */
+.ts-hero .tp-hero-title { font-size: clamp(44px, 3.75vw, 74px); line-height: 1.04; letter-spacing: -.065em; word-spacing: .08em; }
+.ts-hero.tp-hero-ptb { padding-top: 190px; padding-bottom: 95px; }
+.ts-hero-line { display: block; white-space: nowrap; }
+.ts-hero-partner { color: var(--brand-green); }
+.ts-hero-row { --bs-gutter-x: 50px; }
+.ts-hero-summary { max-width: 550px; margin-top: 35px; }
+.ts-hero-summary p { font-size: 18px; line-height: 1.6; color: #c5c7cd; margin-bottom: 25px; }
+.ts-hero-actions { margin-top: 10px; }
+.ts-hero-proof { padding-top: 12px; }
+.ts-hero-proof-label { display: flex; justify-content: space-between; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid #ffffff40; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: #b7bbc3; }
+.ts-hero-project { display: block; }
+.ts-hero-project > img { width: 100%; height: auto; display: block; }
+.ts-hero-project-caption { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-top: 22px; }
+.ts-hero-project-caption strong { display: block; font-size: 22px; font-weight: 500; color: #fff; }
+.ts-hero-project-caption span { display: block; font-size: 12px; color: #a8adb7; margin-top: 5px; }
+.ts-hero-project-caption svg { flex-shrink: 0; color: #fff; transition: transform .3s, color .3s; }
+.ts-hero-project:hover .ts-hero-project-caption svg { color: var(--brand-green); transform: translate(3px,-3px); }
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .ts-hero .tp-hero-title { font-size: 3.75vw; }
+  .ts-hero-row { --bs-gutter-x: 45px; }
+}
+@media (max-width: 1199px) {
+  .ts-hero.tp-hero-ptb { padding-top: 165px; padding-bottom: 75px; }
+  .ts-hero .tp-hero-title { font-size: clamp(48px, 6.8vw, 78px); }
+  .ts-hero-proof { max-width: 620px; margin-top: 55px; padding-top: 0; }
+}
+@media (max-width: 767px) {
+  .ts-hero.tp-hero-ptb { padding-top: 145px; padding-bottom: 65px; }
+  .ts-hero .tp-hero-title { font-size: clamp(38px, 8.5vw, 58px); letter-spacing: -.06em; line-height: 1.05; }
+  .ts-hero-line { white-space: normal; }
+  .ts-hero-line + .ts-hero-line { margin-top: 12px; }
+  .ts-hero-summary { margin-top: 26px; }
+  .ts-hero-summary p { font-size: 16px; }
+  .ts-hero-row { --bs-gutter-x: 30px; }
+  .ts-hero-proof { margin-top: 45px; }
+}
+
+/* Keep the desktop hover portrait, with an equivalent keyboard reveal. */
+.ts-person-thumb { display: none; }
+.ts-person-info { display: contents; }
+#people .tp-award-reveal-img { background-position: center 25%; }
+#people [data-person="um"] .tp-award-reveal-img { background-size: 120%; background-position: center 12%; }
+#people [data-person="zu"] .tp-award-reveal-img { background-size: 125%; background-position: 60% 5%; }
+#people .tp-award-item:focus-visible .tp-award-reveal-img {
+  opacity: 1; top: 50% !important; left: auto !important; right: 25%;
+  margin: 0; transform: translateY(-50%) scale(1) !important;
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--brand-green); outline-offset: 5px; }
+#people .tp-award-position, .tp-service-content p { color: #c5c7cd; }
+.tp-project-category span { color: #d2d4db; }
+@media (max-width: 767px), (hover: none) {
+  #people .tp-award-box-left { display: flex; align-items: center; gap: 18px; }
+  .ts-person-info { display: block; min-width: 0; }
+  #people .ts-person-thumb { display: block; width: 88px; height: 104px; flex: 0 0 88px; object-fit: cover; object-position: center 25%; border-radius: 8px; }
+  #people [data-person="um"] .ts-person-thumb { object-position: center 12%; }
+  #people [data-person="zu"] .ts-person-thumb { object-position: 60% 5%; }
+  #people .tp-award-reveal-img { display: none; }
+  #people .tp-award-text { line-height: 1.2; }
+  #people .tp-award-box-right { margin-left: 106px; }
+  #people .tp-award-item { padding: 24px 18px; }
+}
+
+/* Respect the OS preference; the normal GSAP experience is unchanged. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  #smooth-wrapper, #smooth-content { position: static !important; overflow: visible !important; height: auto !important; transform: none !important; }
+  #magic-cursor, .cursor, #preloader, #loading, .tp-project-thumb canvas { display: none !important; }
+  .tp_fade_anim, .tp_text_anim, .tp-char-animation, .tp-text-invert, .tp-text-bounce, .tp-project-thumb img { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+  .tp-service-panel, .tp-panel-pin, .tp-funfact-panel, .tp-work-item, .tp-work-wrapper { position: relative !important; transform: none !important; }
+  .tp-funfact-panel-wrap { width: 100% !important; height: auto !important; display: block !important; }
+  .tp-funfact-panel { height: auto !important; }
+  .tp-text-slide-active .swiper-wrapper { transform: none !important; flex-wrap: wrap; justify-content: center; gap: 18px; }
+  .tp-text-slide-active .swiper-slide { width: auto !important; }
+  .tp-text-slide-active .swiper-slide:nth-child(n+7) { display: none; }
+  .tp-text-slide-active { overflow: visible; }
+}
+.tp-project-thumb .tp--hover-img { position: relative; display: block; }
+#about .tp-about-thumb img { height: 615px; object-fit: cover; }
+.ts-browser-bar { height: 26px; display: flex; align-items: center; gap: 5px; background: #edf0f3; padding: 0 10px; border-radius: 7px 7px 0 0; }
+.ts-browser-bar i { width: 5px; height: 5px; border-radius: 50%; background: #aeb4bf; }
+.ts-browser-bar span { flex: 1; font: 9px Arial,sans-serif; text-align: center; color: #515663; }
+.ts-quote-initials { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; background: #25262c; color: #fff; font-size: 17px; }
+#people .tp-award-text { font-size: clamp(20px, 2.5vw, 38px); }
+#people .tp-award-year { min-width: 90px; }
+#contact .tp-footer-widget-info p { color: #c8c8ca; font-size: 15px; line-height: 1.6; }
+@media (max-width: 767px) {
+  #people .tp-award-year { min-width: 60px; }
+  #people .tp-award-text { white-space: normal; }
+  #contact .tp-footer-widget-info > a { font-size: 18px; }
+}
+
+/* Project wallpaper shares the original banner sizing and parallax. */
+.tp-banner-img { position: relative; background: #00dc92; }
+.ts-project-logo-wallpaper {
+  position: absolute;
+  inset: -100px 0;
+  background-image: url('../img/brand/project-logo-pattern.svg');
+  background-repeat: repeat;
+  background-size: clamp(680px, 85vw, 1400px) auto;
+  background-position: center center;
+}
+
+/* A local SVG world map, using the site's existing brand palette. */
+.ts-global-presence { padding: 90px 0 60px; background: var(--brand-ink); border-top: 1px solid #ffffff16; }
+.ts-map-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; margin-bottom: 32px; }
+.ts-map-heading .tp-section-subtitle { display: inline-block; color: #b8bec9; margin-bottom: 18px; }
+.ts-map-heading h2 { font-size: clamp(38px, 4vw, 68px); letter-spacing: -.055em; line-height: 1.1; margin: 0; color: #fff; }
+.ts-map-heading p { font-size: 14px; color: #b8bec9; margin: 0 0 5px; }
+.ts-map-canvas { max-width: 1100px; margin: 0 auto 25px; }
+.ts-world-map { display: block; width: 100%; height: auto; overflow: visible; }
+.ts-map-grid path { fill: none; stroke: #ffffff; stroke-opacity: .06; stroke-width: .6; }
+.ts-map-land path { fill: #182332; stroke: #0e0f11; stroke-width: .65; stroke-linejoin: round; }
+.ts-map-connections path { fill: none; stroke: var(--brand-green); stroke-width: 1; stroke-dasharray: 4 6; opacity: .4; }
+.ts-map-country { cursor: pointer; outline: none; }
+.ts-map-office-land { fill: var(--brand-blue); stroke: #0e0f11; stroke-width: .8; transition: fill .25s ease; }
+.ts-map-country.is-active .ts-map-office-land { fill: var(--brand-green); }
+.ts-map-hit { fill: transparent; stroke: none; }
+.ts-map-halo { fill: var(--brand-blue); fill-opacity: .16; stroke: #8290ff; stroke-width: .8; }
+.ts-map-pin { fill: #fff; stroke: var(--brand-blue); stroke-width: 2.5; }
+.ts-map-label { fill: #e8edf5; font-size: 14px; font-family: 'Inter', sans-serif; font-weight: 500; paint-order: stroke; stroke: var(--brand-ink); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
+.ts-map-country.is-active .ts-map-halo { fill: var(--brand-green); stroke: var(--brand-green); }
+.ts-map-country.is-active .ts-map-pin { fill: var(--brand-green); stroke: var(--brand-ink); }
+.ts-map-country.is-active .ts-map-label { fill: var(--brand-green); }
+.ts-map-country.is-reached .ts-map-office-land { fill: var(--brand-green); }
+.ts-map-country.is-reached .ts-map-halo { fill: var(--brand-green); stroke: var(--brand-green); }
+.ts-map-country.is-reached .ts-map-pin { fill: var(--brand-green); stroke: var(--brand-ink); }
+.ts-map-country.is-reached .ts-map-label { fill: var(--brand-green); }
+/* Fit the complete story below the fixed navigation during its short pin. */
+.ts-global-presence.has-map-story { padding: 32px 0 20px; }
+.has-map-story .ts-map-heading { margin-bottom: 16px; }
+.has-map-story .ts-map-canvas { width: min(100%, calc((100vh - 460px) * 1.96)); margin-bottom: 16px; }
+.ts-map-country:focus-visible .ts-map-office-land { stroke: #fff; stroke-width: 1.5; }
+.ts-map-country:focus-visible .ts-map-halo { stroke: #fff; stroke-width: 2.5; }
+.ts-map-locations { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #ffffff25; border-bottom: 1px solid #ffffff25; }
+.ts-location-button { display: flex; align-items: center; text-align: left; gap: 20px; min-height: 110px; padding: 25px 24px; border: 0; border-radius: 0; color: #fff; background: transparent; cursor: pointer; position: relative; font-family: 'Inter', sans-serif; }
+.ts-location-button + .ts-location-button { border-left: 1px solid #ffffff25; }
+.ts-location-button::before { content: ''; position: absolute; height: 2px; left: 0; right: 0; top: -1px; background: var(--brand-green); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.ts-location-button.is-active::before { transform: scaleX(1); }
+.ts-location-button:hover, .ts-location-button.is-active { background: #00dc9207; }
+.ts-location-index { color: #8b94a3; font-size: 12px; align-self: flex-start; margin-top: 6px; }
+.ts-location-button strong { display: block; font-size: 25px; font-weight: 500; line-height: 1.2; margin-bottom: 9px; color: inherit; }
+.ts-location-button > span:nth-child(2) > span { font-size: 13px; color: #b8bec9; }
+.ts-location-arrow { margin-left: auto; font-size: 25px; color: #b8bec9; }
+.ts-location-button.is-active strong, .ts-location-button.is-active .ts-location-arrow { color: var(--brand-green); }
+.ts-map-detail { min-height: 72px; display: flex; align-items: center; gap: 15px; padding: 20px 0; color: #b8bec9; font-size: 14px; }
+.ts-map-detail strong { font-weight: 500; color: #fff; }
+.ts-location-dot { width: 6px; height: 6px; background: var(--brand-green); border-radius: 50%; flex: 0 0 6px; }
+.ts-map-detail a { margin-left: auto; color: #fff; }
+.ts-map-detail a span { margin-left: 18px; color: var(--brand-green); }
+.ts-map-detail a:hover { color: var(--brand-green); }
+@media (max-width: 767px) {
+  .ts-global-presence { padding: 65px 0 45px; }
+  .ts-map-heading { display: block; margin-bottom: 20px; }
+  .ts-map-heading p { margin-top: 18px; }
+  .ts-map-canvas { margin: 15px -8px 22px; }
+  .ts-map-label { font-size: 22px; }
+  .ts-map-locations { grid-template-columns: 1fr; }
+  .ts-location-button { min-height: 88px; padding: 20px 12px; gap: 16px; }
+  .ts-location-button + .ts-location-button { border-left: 0; border-top: 1px solid #ffffff18; }
+  .ts-location-button strong { font-size: 22px; margin-bottom: 5px; }
+  .ts-map-detail { flex-wrap: wrap; gap: 10px; }
+  .ts-map-detail a { flex-basis: 100%; margin: 8px 0 0 16px; }
+}
