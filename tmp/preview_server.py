@@ -12,7 +12,7 @@ class PreviewHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         path = unquote(urlsplit(self.path).path)
         target = (ROOT / path.lstrip('/')).resolve()
-        allowed = target in (ROOT, ROOT / 'index.html', ROOT / 'index_4.html') or (ROOT / 'assets') in target.parents
+        allowed = target in (ROOT, ROOT / 'index.html', ROOT / 'index_4.html', ROOT / 'projects.html') or (ROOT / 'assets') in target.parents
         if not allowed or (target.is_dir() and target != ROOT):
             self.send_error(404)
             return

@@ -52,15 +52,15 @@ parts.append('</svg>')
 svg=''.join(parts)
 (ROOT/'assets/img/brand/global-presence-map.svg').write_text(svg,encoding='utf-8')
 markup=f'''<section id="global-presence" class="ts-global-presence" aria-labelledby="ts-presence-heading">
-<div class="container container-1800">
-<div class="ts-map-heading"><div><span class="tp-section-subtitle">Our global presence</span><h2 id="ts-presence-heading">Where we work.</h2></div><p>Select a country to explore our locations.</p></div>
+<div class="container container-1300">
+<div class="ts-map-heading"><div><span class="tp-section-subtitle pre">Our global presence</span><h2 id="ts-presence-heading">Three countries.<br><span>One team.</span></h2></div><p>Pakistan, Canada and Japan.<br>Select a location to connect.</p></div>
 <div class="ts-map-canvas">{svg}</div>
 <div class="ts-map-locations" role="group" aria-label="Choose a country">
 <button type="button" class="ts-location-button is-active" data-location="pakistan" aria-controls="ts-map-detail" aria-pressed="true"><span class="ts-location-index">01</span><span><strong>Pakistan</strong><span>Lahore</span></span><span class="ts-location-arrow" aria-hidden="true">↗</span></button>
 <button type="button" class="ts-location-button" data-location="canada" aria-controls="ts-map-detail" aria-pressed="false"><span class="ts-location-index">02</span><span><strong>Canada</strong><span>Calgary &amp; Edmonton</span></span><span class="ts-location-arrow" aria-hidden="true">↗</span></button>
-<button type="button" class="ts-location-button" data-location="japan" aria-controls="ts-map-detail" aria-pressed="false"><span class="ts-location-index">03</span><span><strong>Japan</strong><span>Chiba</span></span><span class="ts-location-arrow" aria-hidden="true">↗</span></button>
+<button type="button" class="ts-location-button" data-location="japan" aria-controls="ts-map-detail" aria-pressed="false"><span class="ts-location-index">03</span><span><strong>Japan</strong><span>Yotsukaido, Chiba</span></span><span class="ts-location-arrow" aria-hidden="true">↗</span></button>
 </div>
-<div id="ts-map-detail" class="ts-map-detail" role="status" aria-live="polite" aria-atomic="true"><span class="ts-location-dot" aria-hidden="true"></span><strong data-map-country>Pakistan</strong><span data-map-cities>Lahore</span><a href="#contact" aria-label="Contact the TekScaleUp team">Connect with our team <span aria-hidden="true">↗</span></a></div>
+<div id="ts-map-detail" class="ts-map-detail" role="status" aria-live="polite" aria-atomic="true"><span class="ts-location-dot" aria-hidden="true"></span><strong data-map-country>Pakistan</strong><span data-map-cities>Z-tower, Q-block, Johar Town, Lahore, Pakistan</span><a href="#contact" aria-label="Contact the TekScaleUp team">Connect with our team <span aria-hidden="true">↗</span></a></div>
 </div></section>'''
 (ROOT/'tmp/global-map-section.html').write_text(markup,encoding='utf-8')
 (ROOT/'tmp/map-source/README.md').write_text('Geography: Natural Earth 1:110m admin 0 countries, public domain.\nhttps://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson\nProjection: Natural Earth 1, following the official D3 implementation (ISC license).\nhttps://github.com/d3/d3-geo/blob/main/src/projection/naturalEarth1.js\nCity pins indicate geographic locations; the map does not represent service coverage.\n',encoding='utf-8')

@@ -3,9 +3,9 @@
   const section = document.querySelector('#global-presence');
   if (!section) return;
   const locations = {
-    pakistan: { country: 'Pakistan', cities: 'Lahore' },
-    canada: { country: 'Canada', cities: 'Calgary & Edmonton' },
-    japan: { country: 'Japan', cities: 'Chiba' }
+    pakistan: { country: 'Pakistan', cities: 'Z-tower, Q-block, Johar Town, Lahore, Pakistan' },
+    canada: { country: 'Canada', cities: '287 Taralake Landing Northeast, Calgary, Alberta, Canada; Edmonton, Canada' },
+    japan: { country: 'Japan', cities: '1867-1 Dainichi, Yotsukaido City, Chiba Prefecture, Japan · 千葉県四街道市大日1867-1' }
   };
   const controls = [...section.querySelectorAll('[data-location]')];
   const detail = section.querySelector('#ts-map-detail');

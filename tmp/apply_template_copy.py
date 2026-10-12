@@ -57,7 +57,7 @@ cls('tp-offcanvas-social')[0].xpath('.//ul')[0].append(html.fromstring('<li><a h
 cls('tp-offcanvas-open-btn')[0].set('aria-label', 'Open menu')
 cls('tp-offcanvas-close-btn')[0].set('aria-label', 'Close menu')
 
-# Connect the original animated typography to one real project preview.
+# Preserve the original animated typography with a connected brand illustration.
 hero = cls('tp-hero-title')[0]
 hero.tag = 'h1'
 hero_area = cls('tp-hero-area')[0]
@@ -80,7 +80,8 @@ button.set('href', '#contact')
 actions = html.fromstring('<div class="ts-hero-actions tp_fade_anim" data-delay="1.2"></div>')
 actions.append(button)
 left.append(actions)
-content(right, '<div class="ts-hero-proof tp_fade_anim" data-delay="2.2" data-fade-from="right"><div class="ts-hero-proof-label"><span>Featured project</span><span>Geepas UAE</span></div><a class="ts-hero-project" href="https://uae.geepas.com/" target="_blank" rel="noopener noreferrer" aria-label="Explore the Geepas UAE project in a new tab"><div class="ts-browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>uae.geepas.com</span></div><img src="assets/img/portfolio/geepas.webp" alt="Geepas UAE homepage" width="1260" height="710" fetchpriority="high"><div class="ts-hero-project-caption"><div><strong>Geepas UAE</strong><span>Electronics &amp; appliances</span></div><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M1 21L21 1M21 1H1M21 1V21" stroke="currentColor" stroke-width="1.5"/></svg></div></a></div>')
+hero.getparent().insert(0, html.fromstring('<div class="ts-hero-canada"><img src="assets/img/brand/canada-flag.svg" width="32" height="16" alt="Canada flag"><span>Corporation No. 1705776-8</span></div>'))
+content(right, (ROOT/'tmp/hero-system.html').read_text(encoding='utf-8'))
 
 about = section('tp-about-area', 'about')
 about_image = cls('tp-about-thumb')[0].xpath('./img')[0]
@@ -96,11 +97,17 @@ logo_wallpaper = etree.Element('div', {'class': 'ts-project-logo-wallpaper', 'da
 banner_image.getparent().append(logo_wallpaper)
 text(cls('tp-about-text')[0].xpath('./p')[0], 'TekScaleUp brings technology, design and marketing together to solve business challenges. We build digital products, strengthen IT operations and help businesses reach their customers.')
 content(cls('tp-about-avater-info')[0].xpath('.//p')[0], 'A global network of technical expertise,<br> with a presence in Pakistan, Canada and Japan.')
-for counter, label, value in zip(cls('tp-about-funcact-item'), ['Clients<br>worldwide', 'Completed<br>projects'], ['20', '100']):
+counter_template = cls('tp-about-funcact-item')[0].getparent()
+counter_row = counter_template.getparent()
+for _ in range(2):
+    counter_row.append(deepcopy(counter_template))
+counter_row.set('class', counter_row.get('class', '') + ' ts-about-counters')
+for counter, label, value in zip(cls('tp-about-funcact-item'), ['Clients<br>worldwide', 'Completed<br>projects', 'Global tech<br>resources', 'Partner<br>companies'], ['20', '100', '100', '200']):
     digit = counter.xpath('.//i')[0]
     digit.set('data-purecounter-end', value)
     digit.tail = '+'
     content(counter.xpath('./p')[0], label)
+
 
 for node, label in zip(cls('tp-text-slide-title'), ['Software Development','UI/UX Design','Digital Marketing','Cloud & Security','AI & IoT','Technology Partner'] * 5):
     text(node, label)
@@ -136,6 +143,7 @@ project_data = [
     ('DankStop','https://dankstop.com/','dankstop','Specialty retail'),
 ]
 columns = cls('tp-project-item')[0].getparent().getparent()
+columns.set('class', 'row ts-project-grid')
 column_nodes = list(columns)
 template = deepcopy(cls('tp-project-item')[0])
 for column in column_nodes:
@@ -157,18 +165,18 @@ for index, (name, url, slug, category) in enumerate(project_data):
     thumb.insert(0, bar)
     text(cls('tp-project-title', item)[0].xpath('./a')[0], name)
     content(cls('tp-project-category', item)[0], f'<span>{escape(category)}</span>')
-    column_nodes[index % 2].append(item)
-text(cls('tp-project-link')[0].xpath('.//*[contains(@class,"tp-btn-black-text")]')[0], 'Start your project')
+    column = etree.SubElement(columns, 'div', {'class': 'col-lg-4 col-md-6'})
+    column.append(item)
+for column in column_nodes:
+    columns.remove(column)
+all_project_columns = [deepcopy(column) for column in columns]
+for column in list(columns)[3:]:
+    columns.remove(column)
+text(cls('tp-project-link')[0].xpath('.//*[contains(@class,"tp-btn-black-text")]')[0], 'Explore more projects')
 
-# Keep the original three pinned metric panels and animated digit spans.
-facts = cls('tp-funfact-panel')
-for panel, title, number in zip(facts, ['Global tech<br>resources', 'Clients<br>worldwide', 'Partner<br>companies'], ['100','20+','200']):
-    content(cls('tp-funfact-title', panel)[0], title)
-    for node, digit in zip(cls('tp-funfact-number', panel)[0].xpath('.//*[contains(@class,"tp-text-bounce")]'), number):
-        text(node, digit)
-    for subtitle in cls('tp-funfact-subtitle', panel):
-        text(subtitle, '( Our network )')
-content(cls('tp-funfact-number', facts[2])[0], '<span><span class="tp-text-bounce" data-delay="1">2</span><span class="tp-text-bounce" data-delay="1.3">0</span><i class="tp-text-bounce" data-delay="1.6">0</i></span>')
+# The client requested removing the separate Our Network section.
+for network in cls('tp-funfact-area'):
+    network.getparent().remove(network)
 
 work = section('tp-work-area', 'process')
 content(cls('tp-work-title-box')[0].xpath('.//h2')[0], 'From<br> idea to<br> delivery')
@@ -241,7 +249,7 @@ content(cls('tp-footer-widget-title')[0], 'Your technology<br> &amp; marketing p
 content(cls('tp-footer-widget-menu')[0].xpath('./ul')[0], ''.join(f'<li><a href="#{anchor}">{label}</a></li>' for anchor,label in [('about','About'),('services','Services'),('projects','Projects'),('process','Our Process'),('global-presence','Our Locations'),('people','The People'),('contact','Contact')]))
 info = cls('tp-footer-widget-info')
 content(info[0], '<a href="mailto:contact@tekscaleup.com">contact@tekscaleup.com</a>')
-content(info[1], '<p>104-A, Avenue 3, NFC Phase 1<br>Lahore, Pakistan</p><p>Pakistan · Canada · Japan</p>')
+content(info[1], '<div class="ts-office-addresses"><address><strong>Pakistan</strong>Z-tower, Q-block, Johar Town,<br>Lahore, Pakistan</address><address><strong>Canada</strong>287 Taralake Landing Northeast,<br>Calgary, Alberta, Canada<br>Edmonton, Canada</address><address><strong>Japan</strong>1867-1 Dainichi, Yotsukaido City,<br>Chiba Prefecture, Japan<br><span lang="ja">千葉県四街道市大日1867-1</span></address></div>')
 social = cls('tp-footer-widget-social')[0]
 content(social, ''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer" aria-label="TekScaleUp on {name}"><span><i class="fa-brands fa-{icon}"></i></span></a>' for name,icon,url in [('LinkedIn','linkedin-in','https://www.linkedin.com/company/23724699/'),('Facebook','facebook-f','https://www.facebook.com/tekscaleup/'),('Instagram','instagram','https://www.instagram.com/tekscaleup/')]))
 content(cls('tp-copyright-right')[0], '<a href="#contact">Contact</a><a href="https://www.linkedin.com/company/23724699/" target="_blank" rel="noopener noreferrer">LinkedIn</a>')
@@ -297,8 +305,36 @@ for node in doc.xpath('//script[@src] | //link[@rel="stylesheet"]'):
     attr = 'src' if node.tag == 'script' else 'href'
     value = node.get(attr, '')
     if value.startswith('assets/'):
-        node.set(attr, value.split('?')[0] + '?v=map-motion-20261010-3')
+        node.set(attr, value.split('?')[0] + '?v=locations-20261012-1')
+# Set page navigation after the stock-template link cleanup.
+cls('tp-project-link')[0].xpath('.//a')[0].set('href', 'projects.html')
 result = '<!doctype html>\n' + html.tostring(doc, encoding='unicode', method='html')
 for path in ('index.html','index_4.html'):
     (ROOT / path).write_text(result, encoding='utf-8')
 print('Applied TekScaleUp content to original template. Original animation classes and button markup retained.')
+
+# Dedicated portfolio page shares the original navigation, footer and motion scripts.
+portfolio = deepcopy(doc)
+portfolio_main = portfolio.xpath('//main')[0]
+for node in list(portfolio_main):
+    portfolio_main.remove(node)
+portfolio_main.append(html.fromstring('<section class="ts-projects-intro"><div class="container"><span class="tp-section-subtitle">Our work</span><h1>Projects.<br><span>Built for business.</span></h1><p>Explore the businesses in our portfolio. Select a project to visit its website.</p></div></section>'))
+portfolio_projects = deepcopy(projects)
+portfolio_projects.set('class', 'tp-project-area ts-projects-page')
+portfolio_grid = cls('ts-project-grid', portfolio_projects)[0]
+for node in list(portfolio_grid):
+    portfolio_grid.remove(node)
+for column in all_project_columns:
+    portfolio_grid.append(deepcopy(column))
+text(cls('tp-section-subtitle', portfolio_projects)[0], 'All projects')
+portfolio_link = cls('tp-project-link', portfolio_projects)[0]
+portfolio_link.xpath('.//a')[0].set('href', '#contact')
+text(cls('tp-btn-black-text', portfolio_link)[0], 'Discuss your project')
+portfolio_main.append(portfolio_projects)
+text(portfolio.xpath('//title')[0], 'Projects | TekScaleUp')
+for a in portfolio.xpath('//a[@href]'):
+    href = a.get('href')
+    if href.startswith('#') and href not in ('#projects', '#contact', '#top'):
+        a.set('href', 'index.html' + href)
+(ROOT/'projects.html').write_text('<!doctype html>\n' + html.tostring(portfolio, encoding='unicode', method='html'), encoding='utf-8')
+print('Created projects.html with all eight projects.')

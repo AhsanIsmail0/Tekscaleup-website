@@ -13,6 +13,7 @@
 !/tmp/map-source/
 !/tmp/preview_server.py
 !/tmp/verify_template.py
+!/tmp/hero-system.html
 
 __pycache__/
 *.pyc
