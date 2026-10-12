@@ -1,22 +1,89 @@
 /* Content integration only. The original main.css owns the layout and buttons. */
+/* Presence uses the same constructed lines, type weight and blue-green hierarchy as the hero. */
+.ts-global-presence { border-top: 1px solid #ffffff25; }
+#global-presence .ts-map-heading { margin-bottom: 28px; }
+#global-presence .ts-map-heading h2 { font-weight: 600; letter-spacing: -.055em; line-height: 1.05; }
+.ts-presence-stage { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(260px, 1fr); border-top: 1px solid #ffffff25; border-bottom: 1px solid #ffffff25; align-items: stretch; }
+#global-presence .ts-map-canvas { width: 100%; margin: 0; align-self: center; background: radial-gradient(ellipse at 35% 45%, #3746ff12, transparent 70%); padding: 16px 20px; }
+.ts-map-caption { display: flex; justify-content: space-between; border-top: 1px solid #ffffff15; padding: 14px 0 0; color: #aeb2ba; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; }
+.ts-map-caption span:last-child { color: var(--brand-green); }
+#global-presence .ts-map-detail { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 14px; min-height: 345px; padding: 30px; border-left: 1px solid #ffffff25; background: #14171e; position: relative; }
+#global-presence .ts-map-detail::before { content: ''; position: absolute; top: -1px; left: -1px; width: 45px; height: 3px; background: var(--brand-blue); }
+.ts-office-eyebrow { display: flex; align-items: center; gap: 10px; color: #afb5c0; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
+#global-presence .ts-map-detail > strong { font-size: clamp(26px,3vw,40px); line-height: 1.15; font-weight: 600; letter-spacing: -.045em; }
+#global-presence .ts-map-detail [data-map-cities] { font-size: 13px; color: #c7cbd3; line-height: 1.7; }
+.ts-office-registration { width: 100%; padding-top: 18px; border-top: 1px solid #ffffff20; display: grid; gap: 5px; }
+.ts-office-registration[hidden], [data-map-tax][hidden] { display: none; }
+.ts-office-registration [data-map-entity] { font-size: 10px; letter-spacing: .02em; color: #aeb2ba; margin-bottom: 5px; }
+.ts-office-registration [data-map-registration-label] { color: #bfc5d0; font-size: 11px; font-weight: 400; }
+.ts-office-registration [data-map-registration-number] { font-size: 18px; font-weight: 500; color: var(--brand-green); font-variant-numeric: tabular-nums; letter-spacing: .04em; overflow-wrap: anywhere; }
+.ts-office-registration [data-map-tax] { color: #c7cbd3; font-size: 11px; line-height: 1.5; }
+#global-presence .ts-map-detail a { margin: 8px 0 0; font-size: 12px; color: #fff; }
+#global-presence .ts-map-country.is-reached .ts-map-office-land { fill: #3746ff; }
+#global-presence .ts-map-country.is-active .ts-map-office-land { fill: var(--brand-green); }
+#global-presence .ts-map-connections [data-route="canada"] { stroke: var(--brand-blue); }
+#global-presence .ts-map-locations { border-top: 0; }
+#global-presence .ts-location-button { min-height: 90px; padding-top: 18px; padding-bottom: 18px; }
+.ts-footer-registration { display: block; border-left: 2px solid var(--brand-blue); padding-left: 10px; margin-top: 12px; font-size: 11px; line-height: 1.7; color: #aeb2ba; }
+/* Name and role have separate lines at every size, including long names. */
+#people .ts-person-info { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+#people .tp-award-year { display: block; min-width: 0; margin: 0; font-size: 12px; line-height: 1.4; letter-spacing: .08em; color: #aeb2ba; }
+#people .tp-award-text { display: block; font-size: clamp(18px,2.1vw,28px); line-height: 1.25; overflow-wrap: anywhere; }
+#people .tp-award-box-left { min-width: 0; }
+#people .tp-award-box-right { gap: 20px; }
+#people .tp-award-position { font-size: 14px; }
+@media(max-width: 991px) {
+  .ts-presence-stage { grid-template-columns: minmax(0,1fr) minmax(250px,.85fr); }
+  #global-presence .ts-map-detail { padding: 24px; }
+}
+@media(max-width: 767px) {
+  .ts-presence-stage { grid-template-columns: 1fr; }
+  #global-presence .ts-map-canvas { padding: 18px 8px; }
+  #global-presence .ts-map-detail { border-left: 0; border-top: 1px solid #ffffff25; min-height: 0; padding: 25px 20px; }
+  #global-presence .ts-map-detail a { flex-basis: auto; }
+  #people .ts-person-info { gap: 8px; }
+  #people .tp-award-box-right { margin-top: 14px; }
+}
+section[id], [id="projects"], [id="services"] { scroll-margin-top: 100px; }
+.ts-assembly-caption { display: flex; justify-content: space-between; gap: 16px; color: #a8adb7; font-size: 11px; letter-spacing: .06em; padding-bottom: 20px; border-bottom: 1px solid #ffffff25; }
+.ts-assembly-caption span:first-child { color: var(--brand-green); }
+.ts-brand-hero .ts-brand-disciplines { margin-top: 0; }
+.ts-hero-evidence { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12px; color: #aeb2ba; margin-top: 30px; }
+.ts-hero-evidence strong { color: #fff; font-weight: 600; }
+.ts-hero-evidence > span { width: 1px; height: 14px; background: #ffffff35; margin: 0 8px; }
+.ts-project-overview { border-top: 1px solid #ffffff25; margin-top: 18px; padding-top: 18px; }
+.ts-project-overview p { color: #bfc2c9; font-size: 14px; line-height: 1.65; min-height: 70px; margin-bottom: 14px; }
+.ts-project-enquiry { color: var(--brand-green); font-size: 12px; }
+.ts-project-enquiry:hover { color: #fff; }
+.ts-project-enquiry:focus-visible, .ts-email-direct:focus-visible { outline: 2px solid var(--brand-green); outline-offset: 6px; }
+.ts-enquiry { border-top: 1px solid #ffffff25; padding: 100px 0; }
+.ts-enquiry-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; }
+.ts-enquiry h2 { font-size: clamp(40px,4.5vw,64px); line-height: 1.1; letter-spacing: -.055em; margin: 25px 0; font-weight: 600; }
+.ts-enquiry h2 span { color: var(--brand-green); }
+.ts-enquiry-intro p { max-width: 430px; color: #bfc2c9; font-size: 16px; line-height: 1.7; }
+.ts-email-direct { display: inline-block; margin-top: 16px; font-size: 16px; color: #fff; }
+.ts-enquiry-form label { display: block; color: #fff; font-size: 13px; margin-bottom: 10px; }
+.ts-enquiry-form label span { color: #aeb2ba; }
+.ts-enquiry-form input,.ts-enquiry-form select,.ts-enquiry-form textarea { display: block; width: 100%; background: #141619; color: #fff; border: 1px solid #ffffff35; border-radius: 0; padding: 14px 16px; margin-bottom: 22px; height: auto; font-family: inherit; font-size: 14px; line-height: 1.5; }
+.ts-enquiry-form textarea { resize: vertical; min-height: 120px; }
+.ts-enquiry-form input:focus,.ts-enquiry-form select:focus,.ts-enquiry-form textarea:focus { outline: 2px solid var(--brand-green); outline-offset: 2px; }
+.ts-enquiry-form textarea::placeholder { color: #aeb2ba; }
+.ts-enquiry-note { color: #aeb2ba; font-size: 12px; line-height: 1.6; margin: 18px 0 0; }
+@media(max-width: 991px) { .ts-enquiry-layout { grid-template-columns: 1fr; gap: 38px; } .ts-enquiry { padding: 65px 0; } }
+@media(prefers-reduced-motion: reduce) { .ts-assembly-piece { opacity: 1 !important; transform: none !important; } }
 .ts-hero-canada { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
 .ts-hero-canada img { width: 32px; height: 16px; border-radius: 1px; }
 .ts-hero-canada span { color: #a8adb7; font-size: 11px; letter-spacing: .06em; }
 .ts-office-addresses address { font-style: normal; color: #c8c8ca; font-size: 14px; line-height: 1.6; margin: 0 0 20px; }
 .ts-office-addresses strong { display: block; color: #fff; font-weight: 500; margin-bottom: 5px; }
 .ts-hero-system { max-width: 560px; margin-left: auto; }
-.ts-system-art { width: 100%; height: auto; display: block; overflow: visible; }
-.ts-system-layer { animation: ts-system-float 6s ease-in-out infinite; }
-.ts-system-layer-middle { animation-delay: -2s; }
-.ts-system-layer-bottom { animation-delay: -4s; }
-.ts-system-flow { stroke-dasharray: 50 220; animation: ts-system-flow 7s linear infinite; }
-.ts-system-orbit { animation: ts-system-pulse 4s ease-in-out infinite; }
-.ts-system-caption { display: flex; align-items: center; gap: 12px; border-top: 1px solid #ffffff20; padding-top: 18px; color: #a8adb7; font-size: 12px; }
-.ts-system-caption > span:last-child { margin-left: auto; color: var(--brand-green); font-size: 18px; }
-.ts-system-dot { width: 5px; height: 5px; background: var(--brand-green); border-radius: 50%; }
-@keyframes ts-system-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-@keyframes ts-system-flow { to { stroke-dashoffset: -540; } }
-@keyframes ts-system-pulse { 0%,100% { opacity: .4; } 50% { opacity: 1; } }
+.ts-brand-sculpture { display: block; width: 100%; height: auto; overflow: visible; }
+.ts-brand-symbol { transform-origin: 50% 42%; animation: ts-brand-hover 7s ease-in-out infinite; }
+.ts-brand-glint { animation: ts-brand-light 8s linear infinite; }
+.ts-brand-disciplines { display: flex; justify-content: space-between; gap: 18px; border-top: 1px solid #ffffff25; padding-top: 22px; margin-top: 34px; color: #c5c7cd; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
+.ts-brand-disciplines span::before { content: ''; display: inline-block; width: 4px; height: 4px; margin: 0 9px 2px 0; background: var(--brand-green); }
+@keyframes ts-brand-hover { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-13px) rotate(2deg); } }
+@keyframes ts-brand-light { to { stroke-dashoffset: -670; } }
 .ts-about-counters { border-bottom: 1px solid #ffffff20; }
 .ts-about-counters > div { flex: 0 0 50%; width: 50%; }
 .ts-about-counters > div:nth-child(n+3) { border-top: 1px solid #ffffff20; padding-top: 28px; }
@@ -34,7 +101,7 @@
 .ts-projects-page { padding: 30px 0 120px; }
 @media (max-width: 1199px) { .ts-hero-system { margin: 35px auto 0; max-width: 520px; } }
 @media (max-width: 767px) { .ts-hero-system { max-width: 400px; margin-top: 25px; } .ts-projects-intro { padding: 145px 0 45px; } .ts-about-counters .tp-about-funcact-item span { font-size: 54px; } }
-.ts-hero .tp-hero-title { font-size: clamp(44px, 3.75vw, 74px); line-height: 1.04; letter-spacing: -.065em; word-spacing: .08em; }
+.ts-hero .tp-hero-title { font-size: clamp(40px, 3.4vw, 68px); line-height: 1.04; letter-spacing: -.065em; word-spacing: .08em; }
 .ts-hero.tp-hero-ptb { padding-top: 190px; padding-bottom: 95px; }
 .ts-hero-line { display: block; white-space: nowrap; }
 .ts-hero-partner { color: var(--brand-green); }
@@ -52,7 +119,7 @@
 .ts-hero-project-caption svg { flex-shrink: 0; color: #fff; transition: transform .3s, color .3s; }
 .ts-hero-project:hover .ts-hero-project-caption svg { color: var(--brand-green); transform: translate(3px,-3px); }
 @media (min-width: 1200px) and (max-width: 1399px) {
-  .ts-hero .tp-hero-title { font-size: 3.75vw; }
+  .ts-hero .tp-hero-title { font-size: 3.4vw; }
   .ts-hero-row { --bs-gutter-x: 45px; }
 }
 @media (max-width: 1199px) {
@@ -115,7 +182,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--brand-green); o
 #about .tp-about-thumb img { height: 615px; object-fit: cover; }
 .ts-browser-bar { height: 26px; display: flex; align-items: center; gap: 5px; background: #edf0f3; padding: 0 10px; border-radius: 7px 7px 0 0; }
 .ts-browser-bar i { width: 5px; height: 5px; border-radius: 50%; background: #aeb4bf; }
-.ts-browser-bar span { flex: 1; font: 9px Arial,sans-serif; text-align: center; color: #515663; }
+.ts-browser-bar span { flex: 1; font: 9px Poppins,sans-serif; text-align: center; color: #515663; }
 .ts-quote-initials { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; background: #25262c; color: #fff; font-size: 17px; }
 #people .tp-award-text { font-size: clamp(20px, 2.5vw, 38px); }
 #people .tp-award-year { min-width: 90px; }
@@ -154,7 +221,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--brand-green); o
 .ts-map-hit { fill: transparent; stroke: none; }
 .ts-map-halo { fill: var(--brand-blue); fill-opacity: .16; stroke: #8290ff; stroke-width: .8; }
 .ts-map-pin { fill: #fff; stroke: var(--brand-blue); stroke-width: 2.5; }
-.ts-map-label { fill: #e8edf5; font-size: 14px; font-family: 'Inter', sans-serif; font-weight: 500; paint-order: stroke; stroke: var(--brand-ink); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
+.ts-map-label { fill: #e8edf5; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 500; paint-order: stroke; stroke: var(--brand-ink); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
 .ts-map-country.is-active .ts-map-halo { fill: var(--brand-green); stroke: var(--brand-green); }
 .ts-map-country.is-active .ts-map-pin { fill: var(--brand-green); stroke: var(--brand-ink); }
 .ts-map-country.is-active .ts-map-label { fill: var(--brand-green); }
@@ -169,7 +236,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--brand-green); o
 .ts-map-country:focus-visible .ts-map-office-land { stroke: #fff; stroke-width: 1.5; }
 .ts-map-country:focus-visible .ts-map-halo { stroke: #fff; stroke-width: 2.5; }
 .ts-map-locations { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #ffffff25; border-bottom: 1px solid #ffffff25; }
-.ts-location-button { display: flex; align-items: center; text-align: left; gap: 20px; min-height: 110px; padding: 25px 24px; border: 0; border-radius: 0; color: #fff; background: transparent; cursor: pointer; position: relative; font-family: 'Inter', sans-serif; }
+.ts-location-button { display: flex; align-items: center; text-align: left; gap: 20px; min-height: 110px; padding: 25px 24px; border: 0; border-radius: 0; color: #fff; background: transparent; cursor: pointer; position: relative; font-family: 'Poppins', sans-serif; }
 .ts-location-button + .ts-location-button { border-left: 1px solid #ffffff25; }
 .ts-location-button::before { content: ''; position: absolute; height: 2px; left: 0; right: 0; top: -1px; background: var(--brand-green); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
 .ts-location-button.is-active::before { transform: scaleX(1); }

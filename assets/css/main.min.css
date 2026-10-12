@@ -1,4 +1,11 @@
-@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url('../fonts/inter-latin-variable.woff2') format('woff2');}1,14..32,100..900&family=Besley:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Satisfy&family=Teko:wght@300..700&family=Phudu:wght@300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Onest:wght@100..900&display=swap");
+@font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url('../fonts/poppins-latin-300.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/poppins-latin-400.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url('../fonts/poppins-latin-500.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url('../fonts/poppins-latin-600.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url('../fonts/poppins-latin-700.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url('../fonts/poppins-latin-800.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:900;font-display:swap;src:url('../fonts/poppins-latin-900.woff2') format('woff2');}
+1,14..32,100..900&family=Besley:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Satisfy&family=Teko:wght@300..700&family=Phudu:wght@300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Onest:wght@100..900&display=swap");
 @keyframes bannerAnimationTwo {
   0% {
     transform: translate(0px, 0px);
@@ -78,31 +85,31 @@ li,
   /**
   @font family declaration
   */
-  --tp-ff-teko: 'Inter', sans-serif;
-  --tp-ff-body: 'Inter', sans-serif;
-  --tp-ff-heading: 'Inter', sans-serif;
-  --tp-ff-inter: 'Inter', sans-serif;
-  --tp-ff-p: 'Inter', sans-serif;
-  --tp-ff-besley: 'Inter', sans-serif;
-  --tp-ff-mango-thin: 'Inter', sans-serif;
-  --tp-ff-mango-light: 'Inter', sans-serif;
-  --tp-ff-mango: 'Inter', sans-serif;
-  --tp-ff-mango-medium: 'Inter', sans-serif;
-  --tp-ff-mango-semibold: 'Inter', sans-serif;
-  --tp-ff-mango-bold: 'Inter', sans-serif;
-  --tp-ff-clash-light: 'Inter', sans-serif;
-  --tp-ff-clash-regular: 'Inter', sans-serif;
-  --tp-ff-clash-medium: 'Inter', sans-serif;
-  --tp-ff-clash-semibold: 'Inter', sans-serif;
-  --tp-ff-clash-bold: 'Inter', sans-serif;
-  --tp-ff-grotesk: 'Inter', sans-serif;
-  --tp-ff-platform: 'Inter', sans-serif;
-  --tp-ff-playfair: 'Inter', sans-serif;
-  --tp-ff-satisfy: 'Inter', sans-serif;
-  --tp-ff-dirtyline: 'Inter', sans-serif;
-  --tp-ff-phudu: 'Inter', sans-serif;
-  --tp-ff-poppins: 'Inter', sans-serif;
-  --tp-ff-onest: 'Inter', sans-serif;
+  --tp-ff-teko: 'Poppins', sans-serif;
+  --tp-ff-body: 'Poppins', sans-serif;
+  --tp-ff-heading: 'Poppins', sans-serif;
+  --tp-ff-inter: 'Poppins', sans-serif;
+  --tp-ff-p: 'Poppins', sans-serif;
+  --tp-ff-besley: 'Poppins', sans-serif;
+  --tp-ff-mango-thin: 'Poppins', sans-serif;
+  --tp-ff-mango-light: 'Poppins', sans-serif;
+  --tp-ff-mango: 'Poppins', sans-serif;
+  --tp-ff-mango-medium: 'Poppins', sans-serif;
+  --tp-ff-mango-semibold: 'Poppins', sans-serif;
+  --tp-ff-mango-bold: 'Poppins', sans-serif;
+  --tp-ff-clash-light: 'Poppins', sans-serif;
+  --tp-ff-clash-regular: 'Poppins', sans-serif;
+  --tp-ff-clash-medium: 'Poppins', sans-serif;
+  --tp-ff-clash-semibold: 'Poppins', sans-serif;
+  --tp-ff-clash-bold: 'Poppins', sans-serif;
+  --tp-ff-grotesk: 'Poppins', sans-serif;
+  --tp-ff-platform: 'Poppins', sans-serif;
+  --tp-ff-playfair: 'Poppins', sans-serif;
+  --tp-ff-satisfy: 'Poppins', sans-serif;
+  --tp-ff-dirtyline: 'Poppins', sans-serif;
+  --tp-ff-phudu: 'Poppins', sans-serif;
+  --tp-ff-poppins: 'Poppins', sans-serif;
+  --tp-ff-onest: 'Poppins', sans-serif;
   --tp-ff-fontawesome: "Font Awesome 6 Pro";
   /**
   @color declaration

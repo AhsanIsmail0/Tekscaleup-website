@@ -69,7 +69,7 @@ left.set('class', 'col-xl-7')
 right.set('class', 'col-xl-5')
 content(hero, '<span class="ts-hero-line">Your technology team.</span><span class="ts-hero-line">Your marketing team.</span><span class="ts-hero-line ts-hero-partner">One partner.</span>')
 hero.set('aria-label', 'Your technology team. Your marketing team. One partner.')
-left.append(html.fromstring('<div class="ts-hero-summary tp_text_anim"><p>We build software, run infrastructure, and help businesses reach their customers.</p></div>'))
+left.append(html.fromstring('<div class="ts-hero-summary tp_text_anim"><p>From customer-facing websites to the systems behind them, we bring development, IT operations and marketing into one working relationship.</p></div>'))
 button = deepcopy(cls('tp-btn-black')[0])
 for node in button.iter():
     for attr, value in list(node.attrib.items()):
@@ -80,6 +80,7 @@ button.set('href', '#contact')
 actions = html.fromstring('<div class="ts-hero-actions tp_fade_anim" data-delay="1.2"></div>')
 actions.append(button)
 left.append(actions)
+left.append(html.fromstring('<p class="ts-hero-evidence"><strong>20+</strong> clients worldwide <span></span> <strong>100+</strong> completed projects</p>'))
 hero.getparent().insert(0, html.fromstring('<div class="ts-hero-canada"><img src="assets/img/brand/canada-flag.svg" width="32" height="16" alt="Canada flag"><span>Corporation No. 1705776-8</span></div>'))
 content(right, (ROOT/'tmp/hero-system.html').read_text(encoding='utf-8'))
 
@@ -95,7 +96,7 @@ banner_image.set('alt', '')
 banner_image.set('aria-hidden', 'true')
 logo_wallpaper = etree.Element('div', {'class': 'ts-project-logo-wallpaper', 'data-speed': '.7', 'role': 'img', 'aria-label': 'Scattered project logos: Geepas, Wigme, Electromart, Grasscity, Smoke Cartel, Daily High Club, FAMS and DankStop'})
 banner_image.getparent().append(logo_wallpaper)
-text(cls('tp-about-text')[0].xpath('./p')[0], 'TekScaleUp brings technology, design and marketing together to solve business challenges. We build digital products, strengthen IT operations and help businesses reach their customers.')
+text(cls('tp-about-text')[0].xpath('./p')[0], 'Your website, operations and marketing need to work together. Our developers, designers, infrastructure specialists and marketers bring those disciplines into one team, from planning through launch and ongoing support.')
 content(cls('tp-about-avater-info')[0].xpath('.//p')[0], 'A global network of technical expertise,<br> with a presence in Pakistan, Canada and Japan.')
 counter_template = cls('tp-about-funcact-item')[0].getparent()
 counter_row = counter_template.getparent()
@@ -165,6 +166,18 @@ for index, (name, url, slug, category) in enumerate(project_data):
     thumb.insert(0, bar)
     text(cls('tp-project-title', item)[0].xpath('./a')[0], name)
     content(cls('tp-project-category', item)[0], f'<span>{escape(category)}</span>')
+    descriptions = {
+        'geepas': 'An online storefront for electronics and home appliances in the UAE.',
+        'wigme': 'A multi-brand retail experience bringing everyday products into one catalogue.',
+        'electromart': 'Electronics and home appliances for shoppers in Ghana.',
+        'grasscity': 'A specialist retail brand with an extensive online product catalogue.',
+        'smoke-cartel': 'A specialist e-commerce storefront built around product discovery.',
+        'daily-high-club': 'A retail and subscription brand with recurring product collections.',
+        'fams': 'Connected operations and AI-assisted workflows for physical businesses.',
+        'dankstop': 'A specialist retail catalogue with product-led browsing.'
+    }
+    overview = html.fromstring('<div class="ts-project-overview"><p>' + escape(descriptions[slug]) + '</p><a class="ts-project-enquiry" href="#contact">Discuss a similar project <span aria-hidden="true">↗</span></a></div>')
+    item.append(overview)
     column = etree.SubElement(columns, 'div', {'class': 'col-lg-4 col-md-6'})
     column.append(item)
 for column in column_nodes:
@@ -217,7 +230,7 @@ for box, city, country in zip(cls('tp-award-img'), ['Lahore','Calgary & Edmonton
 # Replace the existing location labels with the interactive global-presence map.
 city_row = cls('tp-award-img')[0].getparent().getparent()
 city_row.getparent().remove(city_row)
-people.addprevious(html.fromstring((ROOT/'tmp/global-map-section.html').read_text(encoding='utf-8')))
+people.addprevious(html.fromstring((ROOT/'tmp/cinematic-globe-section.html').read_text(encoding='utf-8')))
 leaders = [('President','Syed Muhammad Ayub Shah','https://www.linkedin.com/in/sayub/','AS'),('CEO','Arsam Javed','https://www.linkedin.com/in/arsam-javed/','AJ'),('CTO','Usman Munier','https://www.linkedin.com/in/usmanmunier/','UM'),('CFO','Zafar Ullah','https://www.linkedin.com/in/zafar-ullah-ab051365/','ZU')]
 leader_dir = ROOT / 'assets/img/people'
 leader_dir.mkdir(exist_ok=True)
@@ -244,12 +257,21 @@ for row, (role, name, url, initials) in zip(cls('tp-award-item'), leaders):
 for row in cls('tp-award-item')[4:]:
     row.getparent().remove(row)
 
-footer = section('tp-footer-area', 'contact')
+footer = section('tp-footer-area', 'footer')
+enquiry = html.fromstring((ROOT/'tmp/enquiry-section.html').read_text(encoding='utf-8'))
+footer.getparent().insert(footer.getparent().index(footer), enquiry)
+enquiry_button = deepcopy(button)
+enquiry_button.set('href', 'mailto:contact@tekscaleup.com?subject=Project%20enquiry')
+for node in enquiry_button.iter():
+    for attr,value in list(node.attrib.items()):
+        if 'heroButtonFilter' in value: node.set(attr,value.replace('heroButtonFilter','enquiryButtonFilter'))
+text(cls('tp-btn-black-text',enquiry_button)[0], 'Email your brief')
+cls('ts-enquiry-action',enquiry)[0].append(enquiry_button)
 content(cls('tp-footer-widget-title')[0], 'Your technology<br> &amp; marketing partner.')
 content(cls('tp-footer-widget-menu')[0].xpath('./ul')[0], ''.join(f'<li><a href="#{anchor}">{label}</a></li>' for anchor,label in [('about','About'),('services','Services'),('projects','Projects'),('process','Our Process'),('global-presence','Our Locations'),('people','The People'),('contact','Contact')]))
 info = cls('tp-footer-widget-info')
 content(info[0], '<a href="mailto:contact@tekscaleup.com">contact@tekscaleup.com</a>')
-content(info[1], '<div class="ts-office-addresses"><address><strong>Pakistan</strong>Z-tower, Q-block, Johar Town,<br>Lahore, Pakistan</address><address><strong>Canada</strong>287 Taralake Landing Northeast,<br>Calgary, Alberta, Canada<br>Edmonton, Canada</address><address><strong>Japan</strong>1867-1 Dainichi, Yotsukaido City,<br>Chiba Prefecture, Japan<br><span lang="ja">千葉県四街道市大日1867-1</span></address></div>')
+content(info[1], '<div class="ts-office-addresses"><address><strong>Pakistan</strong>Z-tower, Q-block, Johar Town,<br>Lahore, Pakistan<small class="ts-footer-registration">TEKSCALEUP (PRIVATE) LIMITED<br>Incorporation No. 0255645<br>Tax Registration No. D522955</small></address><address><strong>Canada</strong>287 Taralake Landing Northeast,<br>Calgary, Alberta, Canada<br>Edmonton, Canada<small class="ts-footer-registration">Tekscaleup corp.<br>Corporation No. 1705776-8</small></address><address><strong>Japan</strong>1867-1 Dainichi, Yotsukaido City,<br>Chiba Prefecture, Japan<br><span lang="ja">千葉県四街道市大日1867-1</span><small class="ts-footer-registration"><span lang="ja">株式会社 SCALE TECH</span><br>Corporate No. 6040001140827</small></address></div>')
 social = cls('tp-footer-widget-social')[0]
 content(social, ''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer" aria-label="TekScaleUp on {name}"><span><i class="fa-brands fa-{icon}"></i></span></a>' for name,icon,url in [('LinkedIn','linkedin-in','https://www.linkedin.com/company/23724699/'),('Facebook','facebook-f','https://www.facebook.com/tekscaleup/'),('Instagram','instagram','https://www.instagram.com/tekscaleup/')]))
 content(cls('tp-copyright-right')[0], '<a href="#contact">Contact</a><a href="https://www.linkedin.com/company/23724699/" target="_blank" rel="noopener noreferrer">LinkedIn</a>')
@@ -292,20 +314,23 @@ for gallery in cls('tp-offcanvas-gallery'):
     gallery.getparent().remove(gallery)
 for stylesheet in head.xpath('.//link[@href="assets/css/main.css"]'):
     stylesheet.set('href', 'assets/css/main.min.css')
-head.append(etree.Element('link', rel='preload', href='assets/fonts/inter-latin-variable.woff2', **{'as': 'font', 'type': 'font/woff2', 'crossorigin': 'anonymous'}))
+head.append(etree.Element('link', rel='preload', href='assets/fonts/poppins-latin-400.woff2', **{'as': 'font', 'type': 'font/woff2', 'crossorigin': 'anonymous'}))
 description = doc.xpath('//meta[@name="description"]')[0].get('content')
 for key, value in [('og:type','website'), ('og:title','TekScaleUp | Your technology & marketing partner'), ('og:description',description), ('og:image','https://tekscaleup.com/assets/img/brand/social-share.png'), ('og:image:width','1200'), ('og:image:height','630'), ('og:image:alt','TekScaleUp. Technology, design and marketing. Pakistan, Canada and Japan.')]:
     head.append(etree.Element('meta', property=key, content=value))
 head.append(etree.Element('meta', name='twitter:card', content='summary_large_image'))
 head.append(etree.Element('meta', name='twitter:image', content='https://tekscaleup.com/assets/img/brand/social-share.png'))
 head.append(etree.Element('link', rel='stylesheet', href='assets/css/template-content.css'))
+head.append(etree.Element('link', rel='stylesheet', href='assets/css/cinematic-globe.css'))
 doc.xpath('//body')[0].append(etree.Element('script', src='assets/js/template-content.js'))
+doc.xpath('//body')[0].append(etree.Element('script', src='assets/js/d3-array.min.js'))
+doc.xpath('//body')[0].append(etree.Element('script', src='assets/js/d3-geo.min.js'))
 doc.xpath('//body')[0].append(etree.Element('script', src='assets/js/global-map.js'))
 for node in doc.xpath('//script[@src] | //link[@rel="stylesheet"]'):
     attr = 'src' if node.tag == 'script' else 'href'
     value = node.get(attr, '')
     if value.startswith('assets/'):
-        node.set(attr, value.split('?')[0] + '?v=locations-20261012-1')
+        node.set(attr, value.split('?')[0] + '?v=cinematic-globe-20261012-1')
 # Set page navigation after the stock-template link cleanup.
 cls('tp-project-link')[0].xpath('.//a')[0].set('href', 'projects.html')
 result = '<!doctype html>\n' + html.tostring(doc, encoding='unicode', method='html')

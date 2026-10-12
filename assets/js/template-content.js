@@ -61,8 +61,39 @@
     closeMenu();
     const smoother = window.ScrollSmoother?.get();
     if (smoother) smoother.scrollTo(target, true, 'top 100px');
-    else target.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'start' });
+    else if (window.gsap && !reducedMotion) window.gsap.to(window, {scrollTo: {y: target, offsetY: 100, autoKill: true}, duration: .85, ease: 'power2.inOut', overwrite: 'auto'});
+    else target.scrollIntoView({ behavior: 'instant', block: 'start' });
     if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
     target.focus({ preventScroll: true });
   });
+})();
+
+/* A finite assembly tells the brand story; the first scroll hands off to About. */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hero = document.querySelector('.ts-brand-hero');
+  if (hero && window.gsap && !reduce) {
+    const pieces = hero.querySelectorAll('.ts-assembly-piece');
+    const timeline = gsap.timeline({delay: .3});
+    timeline.from(pieces[2], {opacity: 0, scale: .4, transformOrigin: 'center', duration: .55, ease: 'power2.out'});
+    timeline.from(pieces[0], {x: -16, y: -10, opacity: 0, duration: .9, ease: 'power3.out'}, .35);
+    timeline.from(pieces[1], {x: 16, y: 10, opacity: 0, duration: .9, ease: 'power3.out'}, .55);
+    timeline.from(hero.querySelectorAll('.ts-brand-disciplines span'), {opacity: 0, y: 8, stagger: .12, duration: .5}, 1);
+    gsap.to(hero.querySelector('.ts-assembly-guides'), {opacity: .15, scrollTrigger: {trigger: '.ts-hero', start: 'top top', end: 'bottom 20%', scrub: true}});
+  }
+  const form = document.querySelector('#ts-enquiry-form');
+  if (!form) return;
+  const link = form.querySelector('.ts-enquiry-action a');
+  const updateDraft = () => {
+    const name = form.elements.name.value.trim();
+    const service = form.elements.service.value;
+    const brief = form.elements.brief.value.trim();
+    const body = `Hello TekScaleUp,\n\nI'm interested in ${service}.\n\n${brief || 'My project goals:'}\n\n${name ? 'Name: ' + name : ''}`;
+    link.href = `mailto:contact@tekscaleup.com?subject=${encodeURIComponent('Project enquiry: ' + service)}&body=${encodeURIComponent(body)}`;
+  };
+  form.addEventListener('input', updateDraft);
+  form.addEventListener('change', updateDraft);
+  form.addEventListener('submit', event => {event.preventDefault(); updateDraft(); link.click();});
+  link.addEventListener('click', () => {document.querySelector('#ts-enquiry-status').textContent = 'Your email app will open a draft. Nothing has been sent by this website. If it does not open, email contact@tekscaleup.com directly.';});
+  updateDraft();
 })();
