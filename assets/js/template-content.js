@@ -97,3 +97,51 @@
   link.addEventListener('click', () => {document.querySelector('#ts-enquiry-status').textContent = 'Your email app will open a draft. Nothing has been sent by this website. If it does not open, email contact@tekscaleup.com directly.';});
   updateDraft();
 })();
+/* Scroll-driven mobile stacks; desktop panels remain owned by main.js. */
+(() => {
+  if (!window.gsap || !window.ScrollTrigger) return;
+  const media = gsap.matchMedia();
+  media.add('(max-width: 767px) and (prefers-reduced-motion: no-preference)', () => {
+    const stage = document.querySelector('#services .tp-service-pin');
+    const panels = stage ? [...stage.querySelectorAll('.tp-service-item')] : [];
+    let height = 0;
+    const measure = () => {
+      panels.forEach(panel => { panel.style.minHeight = ''; });
+      const cardHeight = Math.max(...panels.map(panel => panel.scrollHeight), 0);
+      panels.forEach(panel => { panel.style.minHeight = `${cardHeight}px`; });
+      height = cardHeight + (panels.length - 1) * 54;
+      if (stage) stage.style.height = `${height}px`;
+    };
+    if (stage && panels.length) {
+      stage.classList.add('ts-mobile-service-stage');
+      panels.forEach((panel, i) => { panel.style.zIndex = i + 1; });
+      measure();
+      const story = gsap.timeline({scrollTrigger: {
+        trigger: stage, start: () => `top ${Math.min(80, innerHeight - height - 20)}px`,
+        end: () => `+=${Math.max(innerHeight * .8, height) * (panels.length - 1)}`,
+        pin: true, scrub: .35, invalidateOnRefresh: true, onRefreshInit: measure
+      }});
+      panels.slice(1).forEach((panel, i) => {
+        story.fromTo(panel, {y: () => height}, {y: (i + 1) * 54, duration: 1, ease: 'none'});
+        story.to({}, {duration: .3});
+      });
+    }
+    const grid = document.querySelector('#projects .ts-project-grid');
+    const cards = grid ? [...grid.children] : [];
+    grid?.classList.add('ts-mobile-project-stack');
+    cards.forEach((card, i) => {
+      card.style.zIndex = i + 1;
+      if (i === cards.length - 1) return;
+      ScrollTrigger.create({trigger: card, start: 'top 80px', endTrigger: cards[cards.length - 1],
+        end: 'top 80px', pin: card, pinSpacing: false, invalidateOnRefresh: true});
+    });
+    return () => {
+      stage?.classList.remove('ts-mobile-service-stage');
+      if (stage) stage.style.height = '';
+      panels.forEach(panel => { panel.style.zIndex = ''; panel.style.minHeight = ''; });
+      grid?.classList.remove('ts-mobile-project-stack');
+      cards.forEach(card => { card.style.zIndex = ''; });
+    };
+  });
+  document.fonts?.ready.then(() => ScrollTrigger.refresh());
+})();

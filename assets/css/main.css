@@ -7848,7 +7848,7 @@ body.tp-magic-cursor #magic-cursor {
 }
 .postbox-details-remeber label::before {
   position: absolute;
-  content: url("../img/svg/check.svg");
+  content: none;
   top: -2px;
   left: 2px;
   width: 16px;
@@ -38445,7 +38445,7 @@ body.tp-magic-cursor #magic-cursor {
 }
 .tp-product-details-msg ul li::after {
   position: absolute;
-  content: url("../img/product/product-details-main/product-icon.svg");
+  content: none;
   top: 4px;
   left: 0;
   width: 18px;
@@ -38889,7 +38889,7 @@ body.tp-magic-cursor #magic-cursor {
 }
 .tp-product-details-review-remeber label::before {
   position: absolute;
-  content: url("../img/product/product-details-main/check.svg");
+  content: none;
   top: 4px;
   left: 0;
   width: 18px;
@@ -39510,7 +39510,7 @@ body.tp-magic-cursor #magic-cursor {
 }
 .tp-login-remeber label::before {
   position: absolute;
-  content: url("../img/login/check.svg");
+  content: none;
   top: 4px;
   left: 0;
   width: 18px;
@@ -39733,7 +39733,7 @@ body.tp-magic-cursor #magic-cursor {
 }
 .tp-checkout-option label::before {
   position: absolute;
-  content: url("../img/login/check.svg");
+  content: none;
   top: 4px;
   left: 0;
   width: 18px;
@@ -39975,7 +39975,7 @@ body.tp-magic-cursor #magic-cursor {
 }
 .tp-return-customer-remeber label::before {
   position: absolute;
-  content: url("../img/login/check.svg");
+  content: none;
   top: 4px;
   left: 0;
   width: 18px;
@@ -40002,7 +40002,7 @@ body.tp-magic-cursor #magic-cursor {
 }
 .tp-return-customer-forgot a::after {
   position: absolute;
-  content: url("../img/login/check.svg");
+  content: none;
   left: auto;
   right: 0;
   bottom: 4px;
@@ -42758,7 +42758,7 @@ p.color-g {
   left: 0;
   z-index: 0;
   border-radius: 32px;
-  content: url("../img/update/portfolio/portfolio-thumb.png");
+  content: none;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .cst-portfolio-heading .cst-section-title {

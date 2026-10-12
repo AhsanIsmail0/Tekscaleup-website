@@ -330,7 +330,7 @@ for node in doc.xpath('//script[@src] | //link[@rel="stylesheet"]'):
     attr = 'src' if node.tag == 'script' else 'href'
     value = node.get(attr, '')
     if value.startswith('assets/'):
-        node.set(attr, value.split('?')[0] + '?v=cinematic-globe-20261012-1')
+        node.set(attr, value.split('?')[0] + '?v=mobile-stacks-20261012-2')
 # Set page navigation after the stock-template link cleanup.
 cls('tp-project-link')[0].xpath('.//a')[0].set('href', 'projects.html')
 result = '<!doctype html>\n' + html.tostring(doc, encoding='unicode', method='html')

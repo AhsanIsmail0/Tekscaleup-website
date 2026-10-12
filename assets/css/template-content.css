@@ -288,3 +288,29 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--brand-green); o
   .ts-map-heading h2 { font-size: 38px; }
   .ts-map-heading p { font-size: 13px; }
 }
+/* Compact mobile services, progressively enhanced to scroll stacking. */
+@media (max-width: 767px) {
+  #services .tp-service-item { padding: 0 15px; border-color: #ffffff26; }
+  #services .tp-service-item > .row { display: grid; grid-template-columns: 24px minmax(0, 1fr); column-gap: 12px; margin: 0; }
+  #services .tp-service-item > .row > div { width: auto; padding: 0; }
+  #services .tp-service-item > .row > div:first-child { grid-column: 1; grid-row: 1; padding-top: 20px; }
+  #services .tp-service-item > .row > div:nth-child(2) { grid-column: 2; min-width: 0; }
+  #services .tp-service-item > .row > div:nth-child(3) { grid-column: 2; }
+  #services .tp-service-number span { font-size: 12px; }
+  #services .tp-service-content .tp-section-title { font-size: clamp(18px, 5vw, 24px); line-height: 1.25; letter-spacing: -.7px; margin: 0; }
+  #services .tp-service-content .tp-section-title a { display: block; padding: 16px 0; color: #fff; background: none; -webkit-text-fill-color: #fff; }
+  #services .tp-service-content p { font-size: 13px; line-height: 1.7; margin: 0 0 18px; padding: 0; }
+  #services .tp-service-content .tp-service-btn { margin-bottom: 18px; }
+  #services .tp-service-category { margin: 0 0 14px; display: flex; flex-wrap: wrap; gap: 5px; }
+  #services .tp-service-category span { margin: 0; padding: 6px 8px; font-size: 9px; border-color: #ffffff30; }
+  #services .tp-service-thumb { padding-bottom: 20px; }
+  #services .tp-service-thumb img { display: block; width: 100%; height: auto; aspect-ratio: 1.5; object-fit: contain; background: #15171b; opacity: 1 !important; visibility: visible !important; transform: none !important; }
+  #services .ts-mobile-service-stage { position: relative; }
+  #services .ts-mobile-service-stage .tp-service-item { position: absolute; top: 0; left: 0; width: 100%; background: #0e0f11; }
+  #services .tp-service-content .tp-section-title { font-size: clamp(17px, 4.7vw, 22px); }
+  #projects .ts-mobile-project-stack { display: block; }
+  #projects .ts-mobile-project-stack > .col-lg-4 { position: relative; width: 100%; padding-bottom: 30vh; }
+  #projects .ts-mobile-project-stack > .col-lg-4:last-child { padding-bottom: 0; }
+  #projects .ts-mobile-project-stack .tp-project-item { background: #14171b; padding: 14px; margin-bottom: 0; border-top: 1px solid #ffffff26; }
+  #projects .ts-mobile-project-stack .tp-project-title { font-size: 24px; }
+}

@@ -1,6 +1,7 @@
 # Local restore archives and review output
 /backups/
 /output/
+/dist/
 /assets/qa/
 /assets/img/people/originals/
 
@@ -13,6 +14,8 @@
 !/tmp/map-source/
 !/tmp/preview_server.py
 !/tmp/verify_template.py
+!/tmp/audit_assets.py
+!/tmp/package_site.py
 !/tmp/hero-system.html
 !/tmp/enquiry-section.html
 !/tmp/cinematic-globe-section.html
