@@ -3,9 +3,13 @@
 const encoder = new TextEncoder();
 const cookieName = '__Host-tsu_admin';
 function configured(env) {
- if (typeof env.ADMIN_ACCESS_KEY !== 'string' || env.ADMIN_ACCESS_KEY.length < 32)
+ if (typeof env.ADMIN_ACCESS_KEY !== 'string' || env.ADMIN_ACCESS_KEY.trim().length < 32)
   throw Error('Secure admin access is not configured.');
- return env.ADMIN_ACCESS_KEY;
+ return env.ADMIN_ACCESS_KEY.trim();
+}
+export function loginStatus(env){
+ try{configured(env);return {authenticated:false,local:false,configured:true,loginMode:'access-key',authRevision:'20261013-clipboard-1'};}
+ catch{return {authenticated:false,local:false,configured:false,loginMode:'access-key',authRevision:'20261013-clipboard-1'};}
 }
 async function key(env) {
  return crypto.subtle.importKey('raw', encoder.encode(configured(env)), {name:'HMAC',hash:'SHA-256'}, false, ['sign','verify']);
@@ -41,9 +45,9 @@ export async function login(request, env) {
   env.DB.prepare('INSERT INTO admin_login_limits (bucket,attempts,expires) VALUES (?,1,?) ON CONFLICT(bucket) DO UPDATE SET attempts=attempts+1 RETURNING attempts').bind('all:'+window,now+1800),
   env.DB.prepare('DELETE FROM admin_login_limits WHERE expires < ?').bind(now)
  ]);
- if(attempts[0].results[0].attempts>5||attempts[1].results[0].attempts>100)return result({error:'Too many sign-in attempts. Try again in 15 minutes.'},429,{'Retry-After':'900'});
+ if(attempts[0].results[0].attempts>5||attempts[1].results[0].attempts>100){const retryAfter=900-now%900;return result({error:'Too many sign-in attempts. Please wait before trying again.',retryAfter},429,{'Retry-After':String(retryAfter)});}
  const expected=await crypto.subtle.sign('HMAC',signingKey,encoder.encode('credential:'+configured(env)));
- if(typeof input.password!=='string'||!await crypto.subtle.verify('HMAC',signingKey,expected,encoder.encode('credential:'+input.password)))return result({error:'Invalid sign in.'},403);
+ if(typeof input.password!=='string'||!await crypto.subtle.verify('HMAC',signingKey,expected,encoder.encode('credential:'+input.password.trim())))return result({error:'Password did not match the key in the active deployment. Use Show password to check the pasted value.'},403);
  const payload=encode(encoder.encode(JSON.stringify({exp:now+28800,origin:url.origin,nonce:crypto.randomUUID()})));
  const signature=encode(await crypto.subtle.sign('HMAC',signingKey,encoder.encode('session:'+payload)));
  return result({authenticated:true},200,{'Set-Cookie':cookieName+'='+payload+'.'+signature+'; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=28800'});

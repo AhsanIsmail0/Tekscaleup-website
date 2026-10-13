@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validate,identity,imageExtension} from '../functions/lib/cms.js';
 import {onRequest} from '../functions/api/[[path]].js';
-import {login,logout,keyIdentity} from '../functions/lib/password-auth.js';
+import {login,logout,keyIdentity,loginStatus} from '../functions/lib/password-auth.js';
 const base={type:'blogs',title:'A useful article',slug:'a-useful-article',summary:'A short introduction.',status:'draft',tags:[],sortOrder:0};
 test('normalizes valid content',()=>assert.equal(validate(base).status,'draft'));
 test('rejects executable URLs and invalid slugs',()=>{assert.throws(()=>validate({...base,image:'javascript:alert(1)'}));assert.throws(()=>validate({...base,slug:'../admin'}));});
@@ -28,6 +28,22 @@ test('access key login enforces origin, rate limits, signature, expiry and host'
  count=5;assert.equal((await login(request(env.ADMIN_ACCESS_KEY),env)).status,429);
  assert.match(logout(request('')).headers.get('Set-Cookie'),/Max-Age=0/);
  assert.equal(logout(request('','https://evil.example')).status,403);
+});
+test('clipboard boundary whitespace is ignored but internal spaces and letter case remain significant',async()=>{
+ const password='Test-only passphrase '+crypto.randomUUID();
+ const env={ADMIN_ACCESS_KEY:' \r\n'+password+'\n ',DB:{prepare(){return {bind(){return this}}},async batch(){return [{results:[{attempts:1}]},{results:[{attempts:1}]},{}]}}};
+ const request=value=>new Request('https://tekscaleup.com/api/session',{method:'POST',headers:{Origin:'https://tekscaleup.com','X-CMS-Request':'1'},body:JSON.stringify({password:value})});
+ const response=await login(request(' \n'+password+'\t'),env);assert.equal(response.status,200);
+ const cookie=response.headers.get('Set-Cookie');assert.equal(await keyIdentity(new Request('https://tekscaleup.com/api/session',{headers:{Cookie:cookie}}),env),'arsamjaved@gmail.com');
+ assert.equal((await login(request(password.toLowerCase()),env)).status,403);
+ assert.equal((await login(request(password.replace('only passphrase','only  passphrase')),env)).status,403);
+ assert.equal(loginStatus({ADMIN_ACCESS_KEY:' '.repeat(40)}).configured,false);
+ const status=loginStatus(env);assert.equal(status.configured,true);assert.ok(!JSON.stringify(status).includes(password));
+});
+test('anonymous login status exposes configuration readiness but admin content remains protected',async()=>{
+ const env={ADMIN_ACCESS_KEY:'test-only-'+crypto.randomUUID()};
+ const response=await onRequest({request:new Request('https://tekscaleup.com/api/session'),env});assert.equal(response.status,200);const state=await response.json();assert.equal(state.configured,true);assert.equal(state.authenticated,false);
+ const denied=await onRequest({request:new Request('https://tekscaleup.com/api/admin/content'),env});assert.equal(denied.status,403);
 });
 test('validates JWT signature, audience, expiry and allowed email',async()=>{
  const keys=await crypto.subtle.generateKey({name:'RSASSA-PKCS1-v1_5',modulusLength:2048,publicExponent:new Uint8Array([1,0,1]),hash:'SHA-256'},true,['sign','verify']);

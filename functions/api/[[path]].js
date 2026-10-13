@@ -1,5 +1,5 @@
 import {identity,validate,imageExtension} from '../lib/cms.js';
-import {login,logout} from '../lib/password-auth.js';
+import {login,logout,loginStatus} from '../lib/password-auth.js';
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 const item=row=>({...JSON.parse(row.payload),id:row.id,version:row.version,updatedAt:row.updated_at});
 export async function onRequest({request,env}){
@@ -9,6 +9,11 @@ export async function onRequest({request,env}){
   if(path==='session'&&request.method==='DELETE')return logout(request);
   if(path.startsWith('media/')&&request.method==='GET'){if(!env.MEDIA)return json({error:'Media storage unavailable.'},503);const key=path.slice(6);if(!/^[a-f0-9-]+\.(png|jpg|webp)$/.test(key))return json({error:'Not found'},404);const object=await env.MEDIA.get(key);if(!object)return json({error:'Not found'},404);return new Response(object.body,{headers:{'Content-Type':object.httpMetadata?.contentType||'application/octet-stream','X-Content-Type-Options':'nosniff','Cache-Control':'public,max-age=86400'}});}
   if(path==='content'&&request.method==='GET'){if(!env.DB)return json({error:'Content database unavailable.'},503);const rows=await env.DB.prepare("SELECT * FROM content WHERE status='published'").all();const all=await env.DB.prepare('SELECT payload,status FROM content').all();const routes=all.results.map(r=>({page:JSON.parse(r.payload).page,published:r.status==='published'})).filter(r=>r.page);return json({items:rows.results.map(item).sort((a,b)=>a.sortOrder-b.sortOrder),routes});}
+  if(path==='session'&&request.method==='GET'&&!env.ACCESS_TEAM_DOMAIN&&!env.ACCESS_AUD){
+   const state=loginStatus(env);if(!state.configured)return json(state);
+   try{const email=await identity(request,env);return json({...state,authenticated:true,email,uploads:!!env.MEDIA});}
+   catch{return json(state);}
+  }
   const email=await identity(request,env);
   if(path==='session'&&request.method==='GET')return json({authenticated:true,email,local:false,uploads:!!env.MEDIA});
   if(request.method!=='GET'&&(request.headers.get('X-CMS-Request')!=='1'||request.headers.get('Origin')!==url.origin))return json({error:'Invalid request origin.'},403);
