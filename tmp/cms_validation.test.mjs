@@ -1,9 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {validate,identity,imageExtension} from '../functions/lib/cms.js';
 import {onRequest} from '../functions/api/[[path]].js';
 import {login,logout,keyIdentity,loginStatus} from '../functions/lib/password-auth.js';
 const base={type:'blogs',title:'A useful article',slug:'a-useful-article',summary:'A short introduction.',status:'draft',tags:[],sortOrder:0};
+test('admin script references existing HTML controls and preserves UTF-8 labels',()=>{
+ const html=readFileSync(new URL('../admin/index.html',import.meta.url),'utf8'),script=readFileSync(new URL('../assets/js/admin.js',import.meta.url),'utf8');
+ const ids=new Set([...html.matchAll(/id="([\w-]+)"/g)].map(m=>m[1]));
+ const selectors=[...script.matchAll(/\$\('#([\w-]+)'\)/g)].map(m=>m[1]);assert.deepEqual(selectors.filter(id=>!ids.has(id)),[]);
+ assert.ok(html.includes('View website ↗'));assert.ok(html.includes('id="login-status"'));
+});
 test('normalizes valid content',()=>assert.equal(validate(base).status,'draft'));
 test('rejects executable URLs and invalid slugs',()=>{assert.throws(()=>validate({...base,image:'javascript:alert(1)'}));assert.throws(()=>validate({...base,slug:'../admin'}));});
 test('restricts binary image types',()=>{assert.equal(imageExtension(Uint8Array.from([137,80,78,71]),'image/png'),'png');assert.throws(()=>imageExtension(new TextEncoder().encode('<svg/>'),'image/svg+xml'));});
