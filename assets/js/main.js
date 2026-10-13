@@ -350,7 +350,7 @@
 		let tl = gsap.timeline();
 		let projectpanels = document.querySelectorAll('.tp-service-panel');
 		let baseOffset = 150;
-		let offsetIncrement = 120;
+		let offsetIncrement = document.body.classList.contains('ts-services-page') ? 100 : 120;
 
 		projectpanels.forEach((section, index) => {
 			let topOffset = baseOffset + (index * offsetIncrement);
@@ -359,7 +359,7 @@
 					trigger: section,
 					pin: section,
 					scrub: 1,
-					start: `top ${topOffset}px`,
+					start: () => `top ${baseOffset + index * Math.max(offsetIncrement, ...[...projectpanels].map(panel => (panel.querySelector(".tp-section-title")?.offsetHeight || 60) + 40))}px`,
 					end: "bottom 120%",
 					endTrigger: '.tp-service-pin',
 					pinSpacing: false,

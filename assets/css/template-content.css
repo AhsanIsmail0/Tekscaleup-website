@@ -314,3 +314,32 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--brand-green); o
   #projects .ts-mobile-project-stack .tp-project-item { background: #14171b; padding: 14px; margin-bottom: 0; border-top: 1px solid #ffffff26; }
   #projects .ts-mobile-project-stack .tp-project-title { font-size: 24px; }
 }
+/* Shared responsive corrections. Keep original button shapes and GSAP hooks. */
+.ts-enquiry h2,.ts-projects-intro h1,.ts-section-landing h1,.ts-map-heading h2{color:#fff;font-weight:700}
+.ts-enquiry h2 span,.ts-projects-intro h1 span,.ts-section-landing h1 span,.ts-map-heading h2 span{color:var(--brand-green)}
+.ts-enquiry-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,90px)}
+.ts-enquiry-layout>*{min-width:0}
+.ts-enquiry h2{font-size:clamp(36px,4.5vw,64px);line-height:1.12;overflow-wrap:break-word}
+.ts-email-direct{overflow-wrap:anywhere}
+.ts-detail-heading h1,.ts-detail-section-head h2,.ts-detail-capability-list h3,.ts-services-heading h1,.ts-services-page .tp-service-content h2{font-weight:700}
+.ts-detail-intro>*{min-width:0}
+.ts-detail-principles>*{min-width:0}
+.ts-detail-principles h3{color:#fff;font-weight:600}
+.ts-projects-intro h1,.ts-section-landing h1{overflow-wrap:break-word}
+@media(max-width:1199px){.ts-hero-line{white-space:normal}.ts-hero .tp-hero-title{font-size:clamp(38px,6vw,72px)}}
+@media(max-width:991px){.ts-enquiry-layout{grid-template-columns:1fr}.ts-detail-section-head{grid-template-columns:1fr 2fr}.ts-detail-section-head p{grid-column:2}.ts-detail-capability-list article{grid-template-columns:40px 1fr}.ts-detail-capability-list article>div{grid-column:2}}
+@media(max-width:767px){
+ .ts-enquiry h2{font-size:clamp(34px,9vw,48px)}
+ .ts-enquiry-form input,.ts-enquiry-form select,.ts-enquiry-form textarea{font-size:16px}
+ .ts-services-page .tp-service-content h2,#services .tp-service-content .tp-section-title{font-size:clamp(19px,5.2vw,25px);line-height:1.25;font-weight:700}
+ #services .tp-service-content .tp-section-title a{overflow-wrap:break-word}
+ .ts-detail-section-head{display:block}.ts-detail-section-head h2{font-size:clamp(32px,8vw,44px)}
+ .ts-detail-intro .tp-btn-black-text{white-space:normal}
+ .ts-detail-visual-copy p{font-size:clamp(28px,7.5vw,38px)}
+ .ts-services-heading h1{font-size:clamp(34px,9vw,65px)}
+ .ts-project-overview p{min-height:0}
+ #people .tp-award-box-left{align-items:flex-start}#people .tp-award-text{font-size:clamp(18px,5vw,25px)}
+}
+body.ts-software-detail .ts-detail-heading h1,body.ts-software-detail .ts-detail-section-head h2,body.ts-software-detail .ts-detail-capability-list h3,body.ts-services-page .ts-services-heading h1{font-weight:700}
+#services .tp-service-category{display:flex;gap:8px;flex-wrap:wrap}#services .tp-service-category a{font-size:14px;line-height:1.5;border:1px solid #ffffff35;border-radius:20px;padding:8px 14px;color:#d5d8df}#services .tp-service-category a:hover{color:var(--brand-green);border-color:var(--brand-green)}
+@media(max-width:767px){#services .tp-service-category a{font-size:12px;padding:7px 10px}}

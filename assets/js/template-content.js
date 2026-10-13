@@ -105,11 +105,13 @@
     const stage = document.querySelector('#services .tp-service-pin');
     const panels = stage ? [...stage.querySelectorAll('.tp-service-item')] : [];
     let height = 0;
+    let headingStep = 54;
     const measure = () => {
       panels.forEach(panel => { panel.style.minHeight = ''; });
       const cardHeight = Math.max(...panels.map(panel => panel.scrollHeight), 0);
       panels.forEach(panel => { panel.style.minHeight = `${cardHeight}px`; });
-      height = cardHeight + (panels.length - 1) * 54;
+      headingStep = Math.max(54, ...panels.map(panel => Math.ceil(panel.querySelector(".tp-section-title").getBoundingClientRect().height + 8)));
+      height = cardHeight + (panels.length - 1) * headingStep;
       if (stage) stage.style.height = `${height}px`;
     };
     if (stage && panels.length) {
@@ -122,7 +124,7 @@
         pin: true, scrub: .35, invalidateOnRefresh: true, onRefreshInit: measure
       }});
       panels.slice(1).forEach((panel, i) => {
-        story.fromTo(panel, {y: () => height}, {y: (i + 1) * 54, duration: 1, ease: 'none'});
+        story.fromTo(panel, {y: () => height}, {y: () => (i + 1) * headingStep, duration: 1, ease: 'none'});
         story.to({}, {duration: .3});
       });
     }

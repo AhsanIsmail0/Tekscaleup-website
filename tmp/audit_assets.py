@@ -3,7 +3,7 @@ from urllib.parse import urlsplit, unquote
 import re, json
 
 ROOT = Path(__file__).resolve().parents[1]
-seeds = [ROOT / n for n in ('index.html', 'index_4.html', 'projects.html')]
+seeds = [ROOT / n for n in ('index.html', 'index_4.html', 'projects.html', 'content.html', 'admin/index.html')]
 used = set(seeds)
 queue = list(seeds)
 missing = set()

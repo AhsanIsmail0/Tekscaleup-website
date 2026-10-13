@@ -42,7 +42,10 @@ def external(node, url):
 doc.set('lang', 'en')
 doc.xpath('//body')[0].set('id', 'top')
 text(doc.xpath('//title')[0], 'TekScaleUp - Technology & Marketing Solutions')
-doc.xpath('//meta[@name="description"]')[0].set('content', 'TekScaleUp delivers software, UI/UX design, digital marketing, cloud infrastructure, cybersecurity and emerging technology solutions. Connect with our global team.')
+text(doc.xpath('//title')[0], 'TekScaleUp | Technology, AI & Design')
+for stale in doc.xpath('//p[contains(text(), "Digital Marketing Agency Director")]'):
+    stale.getparent().remove(stale)
+doc.xpath('//meta[@name="description"]')[0].set('content', 'TekScaleUp delivers web and mobile app development, AI, UI/UX design, cloud infrastructure and cybersecurity solutions. Connect with our global team.')
 nav = cls('tp-mobile-menu-active')[0]
 content(nav, '<ul>' + ''.join(f'<li><a href="#{anchor}">{label}</a></li>' for anchor, label in [('about','About'),('services','Services'),('projects','Projects'),('people','The People'),('contact','Contact')]) + '</ul>')
 for a in doc.xpath('//a[contains(@class,"tp-btn-black")]'):
@@ -50,7 +53,7 @@ for a in doc.xpath('//a[contains(@class,"tp-btn-black")]'):
 for node in cls('tp-offcanvas-title'):
     if 'Hello' in node.text_content():
         text(node, 'Let’s work together.')
-text(cls('tp-offcanvas-content')[0].xpath('.//p')[0], 'Technology, marketing and the right people for your next project.')
+text(cls('tp-offcanvas-content')[0].xpath('.//p')[0], 'Technology, design and the right people for your next project.')
 content(cls('tp-offcanvas-contact')[0].xpath('.//ul')[0], '<li><a href="mailto:contact@tekscaleup.com">contact@tekscaleup.com</a></li><li>Pakistan · Canada · Japan</li>')
 content(cls('tp-offcanvas-social')[0].xpath('.//ul')[0], '<li><a href="https://www.linkedin.com/company/23724699/" target="_blank" rel="noopener noreferrer" aria-label="TekScaleUp on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li><li><a href="https://www.instagram.com/tekscaleup/" target="_blank" rel="noopener noreferrer" aria-label="TekScaleUp on Instagram"><i class="fa-brands fa-instagram"></i></a></li>')
 cls('tp-offcanvas-social')[0].xpath('.//ul')[0].append(html.fromstring('<li><a href="https://www.facebook.com/tekscaleup/" target="_blank" rel="noopener noreferrer" aria-label="TekScaleUp on Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>'))
@@ -67,9 +70,9 @@ hero_row.set('class', 'row align-items-center ts-hero-row')
 left, right = list(hero_row)
 left.set('class', 'col-xl-7')
 right.set('class', 'col-xl-5')
-content(hero, '<span class="ts-hero-line">Your technology team.</span><span class="ts-hero-line">Your marketing team.</span><span class="ts-hero-line ts-hero-partner">One partner.</span>')
-hero.set('aria-label', 'Your technology team. Your marketing team. One partner.')
-left.append(html.fromstring('<div class="ts-hero-summary tp_text_anim"><p>From customer-facing websites to the systems behind them, we bring development, IT operations and marketing into one working relationship.</p></div>'))
+content(hero, '<span class="ts-hero-line">Your technology team.</span><span class="ts-hero-line">Your design team.</span><span class="ts-hero-line ts-hero-partner">One partner.</span>')
+hero.set('aria-label', 'Your technology team. Your design team. One partner.')
+left.append(html.fromstring('<div class="ts-hero-summary tp_text_anim"><p>From customer-facing websites to the systems behind them, we bring development, cloud infrastructure and design into one working relationship.</p></div>'))
 button = deepcopy(cls('tp-btn-black')[0])
 for node in button.iter():
     for attr, value in list(node.attrib.items()):
@@ -96,7 +99,7 @@ banner_image.set('alt', '')
 banner_image.set('aria-hidden', 'true')
 logo_wallpaper = etree.Element('div', {'class': 'ts-project-logo-wallpaper', 'data-speed': '.7', 'role': 'img', 'aria-label': 'Scattered project logos: Geepas, Wigme, Electromart, Grasscity, Smoke Cartel, Daily High Club, FAMS and DankStop'})
 banner_image.getparent().append(logo_wallpaper)
-text(cls('tp-about-text')[0].xpath('./p')[0], 'Your website, operations and marketing need to work together. Our developers, designers, infrastructure specialists and marketers bring those disciplines into one team, from planning through launch and ongoing support.')
+text(cls('tp-about-text')[0].xpath('./p')[0], 'Your product, design and infrastructure need to work together. Our developers, designers, AI specialists and infrastructure team bring those disciplines together, from planning through launch.')
 content(cls('tp-about-avater-info')[0].xpath('.//p')[0], 'A global network of technical expertise,<br> with a presence in Pakistan, Canada and Japan.')
 counter_template = cls('tp-about-funcact-item')[0].getparent()
 counter_row = counter_template.getparent()
@@ -110,27 +113,22 @@ for counter, label, value in zip(cls('tp-about-funcact-item'), ['Clients<br>worl
     content(counter.xpath('./p')[0], label)
 
 
-for node, label in zip(cls('tp-text-slide-title'), ['Software Development','UI/UX Design','Digital Marketing','Cloud & Security','AI & IoT','Technology Partner'] * 5):
+for node, label in zip(cls('tp-text-slide-title'), ['Startup & Scaleup Services', 'AI & Connected Technology', 'Cloud & IT Services', 'Design & Branding'] * 5):
     text(node, label)
 
 services = section('tp-service-area', 'services')
-service_data = [
-    ('Software & Design', 'Build the tools your business needs, from websites and e-commerce platforms to custom software and ERP systems. Our UI/UX team makes complex experiences clear and practical.', ['Web & E-commerce','Custom Software','UI/UX Design','ERP Solutions']),
-    ('Cloud & Security', 'Support your daily operations with managed cloud infrastructure, network monitoring and cybersecurity. Our NOC and SOC services help your team maintain the systems it relies on.', ['Cloud Infrastructure','NOC & SOC','Cybersecurity','IT Operations']),
-    ('Digital Marketing', 'Plan your digital presence around the customers you want to reach. We combine digital strategy, social media management and creative content to support your marketing campaigns.', ['Digital Strategy','Social Media','Creative Content','Business Growth']),
-    ('AI & Emerging Tech', 'Develop AI and machine learning applications, connect devices through IoT, and explore Web3. We also create 3D animation and immersive AR, VR and MR experiences, with technical training to support your team.', ['AI & Machine Learning','IoT & Web3','AR / VR / MR','3D & Training']),
-]
-for panel, (title, description, tags) in zip(cls('tp-service-item'), service_data):
+service_data = [('Startup & Scaleup Services', 'Build and improve your digital product with web and mobile app development, supported by design and code audits.', ['Web Development', 'Mobile App Development', 'Design Audit', 'Code Audit']), ('AI & Connected Technology', 'Develop intelligent applications, chatbots and AI agents. Automate workflows and connect devices through IoT.', ['AI & ML Development', 'Chatbots & AI Agents', 'AI Automation', 'IoT']), ('Cloud & IT Services', 'Build the infrastructure behind your applications with DevOps, cloud infrastructure, cybersecurity, systems and networking.', ['DevOps', 'Cloud Infrastructure', 'Cybersecurity', 'Systems & Networking']), ('Design & Branding', 'Shape clear digital experiences and a consistent brand through UI/UX design, web and mobile app design, prototyping and brand identity.', ['UI/UX Design', 'Web/Mobile App Design', 'Prototyping', 'Brand Identity'])]
+for panel, (title, description, tags), target in zip(cls('tp-service-item'), service_data, ['software-development.html','ai-connected-technology.html','cloud-it-services.html','design-branding.html']):
     text(panel.xpath('.//h4/a')[0], title)
-    panel.xpath('.//h4/a')[0].set('href', '#contact')
+    for link in panel.xpath('.//a'): link.set('href',target)
     text(cls('tp-service-content', panel)[0].xpath('./p')[0], description)
-    text(cls('tp-btn-black-text', panel)[0], 'Discuss your project')
+    text(cls('tp-btn-black-text', panel)[0], 'Explore this service')
     content(cls('tp-service-category', panel)[0], ''.join(f'<span>{escape(tag)}</span>' for tag in tags))
 
-for panel, slug, alt in zip(cls('tp-service-item'), ['software-design','cloud-security','digital-marketing','ai-emerging-tech'], ['Software interface design and component development','Protected cloud infrastructure and connected servers','Campaign planning across search, social media and email','Operational data flowing through an AI model into actionable insights']):
+for panel, image, title in zip(cls('tp-service-item'), ['startup-20261013.png', 'ai-20261013.png', 'cloud-20261013.png', 'design-20261013.png'], ['Startup & Scaleup Services', 'AI & Connected Technology', 'Cloud & IT Services', 'Design & Branding']):
     service_image = cls('tp-service-thumb', panel)[0].xpath('./img')[0]
-    service_image.set('src', f'assets/img/services/{slug}-v3.webp')
-    service_image.set('alt', alt)
+    service_image.set('src', 'assets/img/services/'+image)
+    service_image.set('alt', title+' in TekScaleUp blue and green')
 
 projects = section('tp-project-area', 'projects')
 project_data = [
@@ -171,7 +169,7 @@ for index, (name, url, slug, category) in enumerate(project_data):
         'wigme': 'A multi-brand retail experience bringing everyday products into one catalogue.',
         'electromart': 'Electronics and home appliances for shoppers in Ghana.',
         'grasscity': 'A specialist retail brand with an extensive online product catalogue.',
-        'smoke-cartel': 'A specialist e-commerce storefront built around product discovery.',
+        'smoke-cartel': 'A specialist online storefront built around product discovery.',
         'daily-high-club': 'A retail and subscription brand with recurring product collections.',
         'fams': 'Connected operations and AI-assisted workflows for physical businesses.',
         'dankstop': 'A specialist retail catalogue with product-led browsing.'
@@ -209,7 +207,7 @@ content(rating, '<div class="tp-testimonial-ratting-info"><p>About our people ·
 quotes = [
     ('Chris Orsini','Director IT, KellerWilliams','I have worked with Arsam on multiple projects and have been very impressed with his project management and the products he and his team have developed.'),
     ('Prof. Hellen Bontempo','Founder & Business Owner, Abound English School','Arsam is one of the most dedicated professionals with his work. Working with Arsam, I found him as a person with great knowledge and deep background in modern business solutions.'),
-    ('Alan Tao','Digital Marketing Agency Director, Amazing Web Services','Arsam Is Very Helpful and Cares About his work. He shown me his dedication and the commitment to do a good work. I am impressed by his follow up, attention and ability to fulfill the job on time.'),
+    ('Alan Tao','Director, Amazing Web Services','Arsam Is Very Helpful and Cares About his work. He shown me his dedication and the commitment to do a good work. I am impressed by his follow up, attention and ability to fulfill the job on time.'),
     ('Carl A. Young','Data, IT, and Cyber Professional','His intellect is razor-sharp and his patience and desire to help others is always present.'),
     ('Muhammad Faisal Arshad','Finance Operations & Transformation','Arsam javed is a pleasure to work with, and has outstanding experience in business development, project management, stakeholder management.'),
     ('Haider Aly-Reza','Fintech Business Development & Operations','Arsam’s client management and project management skills have laid a key foundation for the success of the company.'),
@@ -267,7 +265,7 @@ for node in enquiry_button.iter():
         if 'heroButtonFilter' in value: node.set(attr,value.replace('heroButtonFilter','enquiryButtonFilter'))
 text(cls('tp-btn-black-text',enquiry_button)[0], 'Email your brief')
 cls('ts-enquiry-action',enquiry)[0].append(enquiry_button)
-content(cls('tp-footer-widget-title')[0], 'Your technology<br> &amp; marketing partner.')
+content(cls('tp-footer-widget-title')[0], 'Your technology<br> &amp; design partner.')
 content(cls('tp-footer-widget-menu')[0].xpath('./ul')[0], ''.join(f'<li><a href="#{anchor}">{label}</a></li>' for anchor,label in [('about','About'),('services','Services'),('projects','Projects'),('process','Our Process'),('global-presence','Our Locations'),('people','The People'),('contact','Contact')]))
 info = cls('tp-footer-widget-info')
 content(info[0], '<a href="mailto:contact@tekscaleup.com">contact@tekscaleup.com</a>')
@@ -316,7 +314,7 @@ for stylesheet in head.xpath('.//link[@href="assets/css/main.css"]'):
     stylesheet.set('href', 'assets/css/main.min.css')
 head.append(etree.Element('link', rel='preload', href='assets/fonts/poppins-latin-400.woff2', **{'as': 'font', 'type': 'font/woff2', 'crossorigin': 'anonymous'}))
 description = doc.xpath('//meta[@name="description"]')[0].get('content')
-for key, value in [('og:type','website'), ('og:title','TekScaleUp | Your technology & marketing partner'), ('og:description',description), ('og:image','https://tekscaleup.com/assets/img/brand/social-share.png'), ('og:image:width','1200'), ('og:image:height','630'), ('og:image:alt','TekScaleUp. Technology, design and marketing. Pakistan, Canada and Japan.')]:
+for key, value in [('og:type','website'), ('og:title','TekScaleUp | Your technology & design partner'), ('og:description',description), ('og:image','https://tekscaleup.com/assets/img/brand/social-share.png'), ('og:image:width','1200'), ('og:image:height','630'), ('og:image:alt','TekScaleUp. Technology, design and AI. Pakistan, Canada and Japan.')]:
     head.append(etree.Element('meta', property=key, content=value))
 head.append(etree.Element('meta', name='twitter:card', content='summary_large_image'))
 head.append(etree.Element('meta', name='twitter:image', content='https://tekscaleup.com/assets/img/brand/social-share.png'))
@@ -330,8 +328,13 @@ for node in doc.xpath('//script[@src] | //link[@rel="stylesheet"]'):
     attr = 'src' if node.tag == 'script' else 'href'
     value = node.get(attr, '')
     if value.startswith('assets/'):
-        node.set(attr, value.split('?')[0] + '?v=mobile-stacks-20261012-2')
+        node.set(attr, value.split('?')[0] + '?v=responsive-20261013')
 # Set page navigation after the stock-template link cleanup.
+content(nav, (ROOT/'tmp/navigation.html').read_text(encoding='utf-8'))
+nav.set('aria-label', 'Main navigation')
+head.append(etree.Element('link', rel='stylesheet', href='assets/css/navigation.css?v=responsive-20261013'))
+doc.xpath('//body')[0].append(etree.Element('script', src='assets/js/navigation.js?v=20261013'))
+content(cls('tp-footer-widget-menu')[0].xpath('./ul')[0], ''.join(f'<li><a href="{url}">{label}</a></li>' for url,label in [('services.html','Services'),('projects.html','Projects'),('blogs.html','Blogs'),('careers.html','Careers'),('index.html#about','About'),('index.html#contact','Contact')]))
 cls('tp-project-link')[0].xpath('.//a')[0].set('href', 'projects.html')
 result = '<!doctype html>\n' + html.tostring(doc, encoding='unicode', method='html')
 for path in ('index.html','index_4.html'):
@@ -363,3 +366,33 @@ for a in portfolio.xpath('//a[@href]'):
         a.set('href', 'index.html' + href)
 (ROOT/'projects.html').write_text('<!doctype html>\n' + html.tostring(portfolio, encoding='unicode', method='html'), encoding='utf-8')
 print('Created projects.html with all eight projects.')
+
+# Initial destinations for the newly introduced menus. Full editorial content follows.
+for filename, title, markup in [
+    ('blogs.html', 'Blogs', '<span class="tp-section-subtitle">Ideas &amp; insights</span><h1>Knowledge.<br><span>Put to work.</span></h1><p>Practical perspectives on software, design, infrastructure and AI development from the TekScaleUp team.</p><div class="ts-section-note"><h2>Articles coming soon.</h2><p>Our first articles are being prepared. In the meantime, explore our work or talk to us about your next project.</p><a href="projects.html">Explore our projects ↗</a></div>'),
+    ('careers.html', 'Careers', '<span class="tp-section-subtitle">Careers at TekScaleUp</span><h1>Build what<br><span>comes next.</span></h1><p>Our work brings software, design, infrastructure and AI together across Pakistan, Canada and Japan.</p><div class="ts-section-note"><h2>Current opportunities</h2><p>No open roles are listed at the moment. Follow our company LinkedIn page for future opportunities and updates.</p><a href="https://www.linkedin.com/company/23724699/" target="_blank" rel="noopener noreferrer">Follow TekScaleUp on LinkedIn ↗</a></div>')
+]:
+    landing = deepcopy(portfolio)
+    landing_main = landing.xpath('//main')[0]
+    for child in list(landing_main):
+        landing_main.remove(child)
+    landing_main.append(html.fromstring('<section class="ts-section-landing"><div class="container">'+markup+'</div></section>'))
+    text(landing.xpath('//title')[0], title+' | TekScaleUp')
+    for a in landing.xpath('//a[@href]'):
+        if a.get('href').startswith('#'):
+            a.set('href','index.html'+a.get('href'))
+    for canonical in landing.xpath('//link[@rel="canonical"]'):
+        canonical.set('href','https://tekscaleup.com/'+filename)
+    for meta in landing.xpath('//meta[@property="og:url"]'):
+        meta.set('content','https://tekscaleup.com/'+filename)
+    (ROOT/filename).write_text('<!doctype html>\n'+html.tostring(landing,encoding='unicode',method='html'),encoding='utf-8')
+
+import runpy
+runpy.run_path(str(ROOT/'tmp/build_services.py'))['build'](doc,services,projects,work,ROOT,cls,text,content)
+runpy.run_path(str(ROOT/'tmp/build_software_detail.py'))['build'](doc,work,ROOT,cls,text,content)
+
+runpy.run_path(str(ROOT/'tmp/build_service_details.py'))['build'](ROOT)
+runpy.run_path(str(ROOT/'tmp/build_home_roadmap.py'))['build'](ROOT)
+runpy.run_path(str(ROOT/'tmp/build_blogs.py'))['build'](ROOT)
+runpy.run_path(str(ROOT/'tmp/integrate_cms.py'))['build'](ROOT)
+runpy.run_path(str(ROOT/'tmp/finalize_site.py'))['build'](ROOT)

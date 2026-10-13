@@ -12,7 +12,7 @@ class PreviewHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         path = unquote(urlsplit(self.path).path)
         target = (ROOT / path.lstrip('/')).resolve()
-        allowed = target in (ROOT, ROOT / 'index.html', ROOT / 'index_4.html', ROOT / 'projects.html') or (ROOT / 'assets') in target.parents
+        allowed = target in (ROOT, ROOT / 'index.html', ROOT / 'index_4.html', ROOT / 'projects.html', ROOT / 'blogs.html', ROOT / 'careers.html', ROOT / 'services.html', ROOT / 'software-development.html', ROOT / 'ai-connected-technology.html', ROOT / 'cloud-it-services.html', ROOT / 'design-branding.html') or (target.parent == ROOT and target.name.startswith('blog-') and target.suffix == '.html' and target.exists()) or (ROOT / 'assets') in target.parents
         if not allowed or (target.is_dir() and target != ROOT):
             self.send_error(404)
             return
@@ -24,3 +24,4 @@ class PreviewHandler(SimpleHTTPRequestHandler):
 port = int(sys.argv[1]) if len(sys.argv) > 1 else 8765
 print(f'TekScaleUp preview: http://127.0.0.1:{port}', flush=True)
 ThreadingHTTPServer(('127.0.0.1', port), PreviewHandler).serve_forever()
+

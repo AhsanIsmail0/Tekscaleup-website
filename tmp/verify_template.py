@@ -6,8 +6,12 @@ original = html.fromstring((root/'tmp/index_4.before-content.html').read_text(en
 page = html.fromstring((root/'index.html').read_text(encoding='utf-8'))
 def nodes(doc, name):
     return doc.xpath('//*[contains(concat(" ",normalize-space(@class)," ")," '+name+' ")]')
-for name in ['tp-char-animation','tp-service-panel','tp-panel-pin','tp-work-item','tp-testimonial-item','tp-text-slide-active']:
+for name in ['tp-char-animation','tp-service-panel','tp-testimonial-item','tp-text-slide-active']:
     assert len(nodes(page,name)) == len(nodes(original,name)), name
+assert len(page.xpath('//*[@data-roadmap-step]')) == 6
+assert len(page.xpath('//*[@data-roadmap-node]')) == 6
+assert nodes(page,'ts-roadmap-progress')
+assert len(nodes(html.parse(str(root/'software-development.html')),'tp-work-item')) == 4
 for name in ['tp-btn-black','tp-btn-black-filter','tp-btn-black-circle']:
     assert len(nodes(page,name)) == len(nodes(original,name)) + 5, name
 for ident in ['smooth-wrapper','smooth-content','magic-cursor']:

@@ -1,0 +1,18 @@
+name = "tekscaleup"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-10-13"
+
+[vars]
+ADMIN_EMAILS = "arsamjaved@gmail.com"
+# Set ADMIN_ACCESS_KEY as an encrypted dashboard secret, never in this file.
+# Use at least 32 random characters. No Access or R2 subscription is required.
+
+[[d1_databases]]
+binding = "DB"
+database_name = "tekscaleup-content"
+database_id = "REPLACE_WITH_ACTUAL_DATABASE_ID"
+
+# Optional, only after explicitly choosing R2 billing:
+# [[r2_buckets]]
+# binding = "MEDIA"
+# bucket_name = "REPLACE_WITH_PRIVATE_MEDIA_BUCKET"

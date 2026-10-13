@@ -1,0 +1,76 @@
+/* Agntix-inspired navigation, using TekScaleUp's existing header and mobile drawer. */
+.tp-header-menu .ts-navigation {display:flex;justify-content:center;gap:30px;margin:0;padding:0;list-style:none}
+.tp-header-menu .ts-navigation>li {position:relative;margin:0}
+.tp-header-menu .ts-navigation>li>a {display:flex;align-items:center;gap:8px;padding:32px 0;color:#fff;font-size:14px;white-space:nowrap}
+.ts-nav-chevron {width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);transition:transform .2s}
+.tp-header-menu .ts-navigation>li.has-dropdown::after,.tp-header-menu .ts-navigation>li.has-dropdown>a::after {display:none!important}
+.tp-header-menu .ts-navigation>li:hover>a,.tp-header-menu .ts-navigation>li:focus-within>a {color:#00dc92}
+.tp-header-menu .ts-nav-panel {position:absolute;top:100%;left:0;width:290px;padding:0;display:grid;background:rgba(30,31,36,.98);border:1px solid #ffffff16;border-radius:12px;box-shadow:0 20px 60px #0005;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .2s,transform .2s,visibility .2s;text-align:left;z-index:100}
+.tp-header-menu .ts-nav-wide .ts-nav-panel {width:850px;left:-160px;grid-template-columns:1fr 1.12fr 1fr}
+.tp-header-menu .ts-nav-about .ts-nav-panel {left:auto;right:0}
+.tp-header-menu .ts-navigation>li:hover>.ts-nav-panel,.tp-header-menu .ts-navigation>li:focus-within>.ts-nav-panel,.tp-header-menu .ts-navigation>li.ts-nav-open>.ts-nav-panel {opacity:1;visibility:visible;transform:translateY(0)}
+.ts-nav-column {padding:28px 26px}
+.ts-nav-column+.ts-nav-column {border-left:1px solid #ffffff12}
+.ts-nav-label {display:block;padding-bottom:20px;margin-bottom:10px;border-bottom:1px solid #ffffff14;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#fff}
+.tp-header-menu .ts-nav-panel a {display:block;padding:12px 0;color:#b8bbc3;font-size:13px;line-height:1.6;transition:color .2s,transform .2s}
+.tp-header-menu .ts-nav-panel a:hover,.tp-header-menu .ts-nav-panel a:focus-visible {color:#00dc92;transform:translateX(4px)}
+.ts-nav-feature {background:linear-gradient(145deg,#3746ff1c,#00dc9210);border-radius:0 12px 12px 0}
+.ts-nav-feature p {font-size:20px;line-height:1.45;color:white;letter-spacing:-.04em;margin:10px 0 22px}
+.tp-header-menu .ts-nav-feature a {color:#00dc92}
+.ts-navigation a:focus-visible,.tp-menu-close:focus-visible {outline:2px solid #00dc92;outline-offset:5px}
+.tp-offcanvas-menu .ts-nav-chevron {display:none}
+.tp-offcanvas-menu .ts-nav-panel {background:transparent;border:0;padding:0 0 16px;display:none}
+.tp-offcanvas-menu .ts-nav-column {padding:15px 0 0;border:0}
+.tp-offcanvas-menu .ts-nav-feature {display:none}
+.tp-offcanvas-menu .ts-nav-label {color:#00dc92;margin:0;padding:10px 0;font-size:10px}
+.tp-offcanvas-menu .ts-nav-panel a {display:block;color:#bdc0c6;font-size:14px;padding:9px 0;line-height:1.6}
+.ts-section-landing {padding:180px 0 100px;min-height:65vh}
+.ts-section-landing h1 {font-size:clamp(48px,8vw,100px);letter-spacing:-.06em;color:white;line-height:1.1;margin:20px 0 30px}
+.ts-section-landing h1 span {color:#00dc92}
+.ts-section-landing p {max-width:650px;color:#afb2ba;line-height:1.8}
+.ts-section-note {border-top:1px solid #ffffff24;padding-top:30px;margin-top:55px}
+@media(min-width:1200px) and (max-width:1400px){.tp-header-menu .ts-navigation{gap:22px}.tp-header-menu .ts-nav-wide .ts-nav-panel{left:-180px;width:780px}}
+@media(prefers-reduced-motion:reduce){.ts-nav-panel,.ts-nav-chevron,.ts-nav-panel a{transition:none!important}}
+/* Expanded service hierarchy, shared with the mobile drawer. */
+.tp-header-menu .ts-nav-wide .ts-services-mega{width:min(1080px,calc(100vw - 80px));left:-280px;display:block;max-height:calc(100dvh - 110px);overflow-y:auto}
+.ts-service-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 34px;padding:30px 34px}
+.ts-nav-service summary{list-style:none;color:#00dc92;font-size:14px;font-weight:600;line-height:1.5;padding:0 0 12px;border-bottom:1px solid #ffffff16}
+.ts-nav-service summary::-webkit-details-marker{display:none}
+.ts-nav-service summary>span{display:none}
+.tp-header-menu .ts-nav-service-links a{padding:5px 0;font-size:12px;line-height:1.6}
+.tp-header-menu .ts-nav-service-links .ts-nav-overview{font-size:10px;color:#fff;padding:10px 0 7px}
+.ts-nav-mega-footer{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:15px 34px;background:linear-gradient(110deg,#3746ff1c,#00dc9210);border-top:1px solid #ffffff12}
+.ts-nav-mega-footer p{margin:0;color:#bdc0c6;font-size:12px}
+.tp-header-menu .ts-nav-mega-footer a{padding:0;color:#00dc92;font-size:12px;white-space:nowrap}
+.tp-offcanvas-menu .ts-service-groups{display:block;padding:0}
+.tp-offcanvas-menu .ts-nav-service{border-bottom:1px solid #ffffff18}
+.tp-offcanvas-menu .ts-nav-service summary{display:flex;justify-content:space-between;gap:15px;cursor:pointer;padding:16px 0;border:0;font-size:14px}
+.tp-offcanvas-menu .ts-nav-service summary>span{display:block}
+.tp-offcanvas-menu .ts-nav-service[open] summary>span{transform:rotate(45deg)}
+.tp-offcanvas-menu .ts-nav-service-links{padding:0 0 15px 12px;border-left:1px solid #3746ff}
+.tp-offcanvas-menu .ts-nav-service-links a{font-size:12px;padding:8px 10px}
+.tp-offcanvas-menu .ts-nav-service-links .ts-nav-overview{color:white;font-size:11px}
+.tp-offcanvas-menu .ts-nav-mega-footer{display:block;padding:18px 0;background:none}
+.tp-offcanvas-menu .ts-nav-mega-footer p{display:none}
+.ts-nav-service summary:focus-visible{outline:2px solid #00dc92;outline-offset:4px}
+.tp-header-menu .ts-services-mega .ts-service-groups{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* Readable navigation hierarchy at desktop and touch sizes. */
+.tp-header-menu .ts-navigation>li>a{font-size:16px;font-weight:600}
+.tp-header-menu .ts-nav-service summary{font-size:18px;line-height:1.4;font-weight:700}
+.tp-header-menu .ts-nav-service-links a{font-size:15px;line-height:1.6;padding:6px 0}
+.tp-header-menu .ts-nav-service-links .ts-nav-overview{font-size:12px;padding:12px 0 8px}
+.tp-header-menu .ts-nav-mega-footer a,.ts-nav-mega-footer p{font-size:14px}
+.tp-header-menu .ts-nav-panel{background:#1e1f24}
+.tp-header-menu .ts-nav-about .ts-nav-panel a{font-size:15px;padding:12px 0}
+.tp-header-menu .ts-nav-wide .ts-services-mega{left:-260px}
+.tp-offcanvas-menu .ts-nav-service summary{font-size:17px;line-height:1.5;min-height:48px}
+.tp-offcanvas-menu .ts-nav-service-links a{font-size:15px;line-height:1.5;min-height:44px;padding:10px}
+.tp-offcanvas-menu .ts-nav-service-links .ts-nav-overview{font-size:13px}
+@media(min-width:1200px) and (max-width:1400px){.tp-header-menu .ts-nav-wide .ts-services-mega{left:-240px;width:850px}}
+.tp-header-menu .ts-nav-service-links a:not(.ts-nav-overview){font-size:17px;color:#d5d8df}.tp-header-menu .ts-nav-service-links .ts-nav-overview{font-size:14px}
+/* Careers availability section must retain contrast against the dark page. */
+.ts-section-landing .ts-section-note h2{color:#fff;font-size:clamp(28px,3vw,40px);font-weight:700;line-height:1.2;letter-spacing:-.04em;margin:0 0 20px}
+.ts-section-landing .ts-section-note p{color:#c5c9d1;margin-bottom:22px}
+.ts-section-landing .ts-section-note>a{display:inline-flex;align-items:center;min-height:44px;color:var(--brand-green);font-size:15px;font-weight:500;line-height:1.6;padding:8px 0}
+.ts-section-landing .ts-section-note>a:hover{color:#fff}
+@media(max-width:767px){.ts-section-landing{padding:120px 0 65px}.ts-section-landing .ts-section-note{margin-top:35px;padding-top:28px}.ts-section-landing .ts-section-note>a{font-size:14px}}

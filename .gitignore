@@ -17,6 +17,10 @@
 !/tmp/audit_assets.py
 !/tmp/package_site.py
 !/tmp/hero-system.html
+!/tmp/navigation.html
+!/tmp/build_services.py
+!/tmp/build_software_detail.py
+!/tmp/software-development-content.html
 !/tmp/enquiry-section.html
 !/tmp/cinematic-globe-section.html
 
@@ -30,3 +34,14 @@ Thumbs.db
 
 # These restore commands require local archives excluded above.
 /UNDO-*.ps1
+!/tmp/build_service_details.py
+!/tmp/build_home_roadmap.py
+!/tmp/finalize_site.py
+!/tmp/audit_site.py
+!/tmp/build_blogs.py
+!/tmp/integrate_cms.py
+!/tmp/cms_preview.py
+!/tmp/seed_cms.py
+!/tmp/test_cms.py
+!/tmp/cms_validation.test.mjs
+!/tmp/build_dashboard.py

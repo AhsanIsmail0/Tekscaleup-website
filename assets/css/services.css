@@ -1,0 +1,23 @@
+.ts-services-hero {padding:180px 0 55px;background-color:#0e0f11;background-image:linear-gradient(#ffffff02 1px,transparent 1px),linear-gradient(90deg,#ffffff02 1px,transparent 1px);background-size:12px 12px}
+.ts-services-heading {display:flex;align-items:center;justify-content:space-between;gap:40px;margin:25px 0 75px}
+.ts-services-heading h1 {font-size:clamp(60px,8.8vw,160px);font-weight:600;line-height:1.02;letter-spacing:-.075em;text-transform:uppercase;color:#fff;margin:0}
+.ts-services-heading>img {width:100px;height:115px;object-fit:contain;align-self:flex-start;margin-top:20px}
+.ts-services-hero-meta {display:flex;align-items:flex-end;justify-content:space-between;gap:35px;color:#b6b8bf;font-size:12px}
+.ts-services-hero-meta p {font-size:14px;line-height:1.7;margin:0;color:#b6b8bf}
+.ts-services-hero-meta a {color:#00dc92;white-space:nowrap}
+.ts-services-brand {position:relative;overflow:hidden;min-height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:65px;background:radial-gradient(ellipse at 25% 110%,#00dc9233,transparent 60%),radial-gradient(ellipse at 75% -20%,#3746ff66,transparent 60%),#14171c;border-top:1px solid #ffffff12;border-bottom:1px solid #ffffff12}
+.ts-services-brand-grid {position:absolute;inset:0;background-image:linear-gradient(#ffffff06 1px,transparent 1px),linear-gradient(90deg,#ffffff06 1px,transparent 1px);background-size:70px 70px;transform:perspective(500px) rotateX(15deg) scale(1.2)}
+.ts-services-brand>img {width:min(52%,650px);position:relative}
+.ts-services-brand-label {position:relative;font-size:11px;letter-spacing:.18em;color:#b5bac6}
+.ts-services-brand-disciplines {display:flex;gap:80px;position:relative;text-transform:uppercase;font-size:11px;letter-spacing:.1em;color:#c6cbd3}
+.ts-services-brand-disciplines span::before {content:'';display:inline-block;width:5px;height:5px;background:#00dc92;margin-right:10px}
+.ts-services-page .tp-service-content h2 {font-size:clamp(26px,3vw,52px);line-height:1.15;letter-spacing:-.055em;margin-bottom:35px}
+.ts-services-page .tp-service-panel {scroll-margin-top:120px}
+.ts-services-page .tp-service-category span {font-size:11px}
+.ts-services-page .tp-service-thumb img {object-fit:contain;background:#15171b}
+@media(min-width:768px){.ts-services-page .tp-service-item{padding-top:20px}.ts-services-page .tp-service-content h2{min-height:60px;display:flex;align-items:center;margin-bottom:28px;font-size:clamp(26px,2.7vw,46px)}}
+@media(max-width:767px){
+ .ts-services-hero{padding:125px 0 35px}.ts-services-heading{margin:25px 0 40px;gap:12px}.ts-services-heading h1{font-size:clamp(37px,10.5vw,70px)}.ts-services-heading>img{width:35px;height:45px;margin-top:5px}
+ .ts-services-hero-meta{align-items:flex-start;flex-direction:column;gap:18px}.ts-services-hero-meta p{font-size:13px}.ts-services-brand{min-height:280px;gap:35px}.ts-services-brand>img{width:75%}.ts-services-brand-disciplines{gap:18px;font-size:8px;letter-spacing:0}.ts-services-brand-label{font-size:9px}
+ .ts-services-page .tp-service-content h2{font-size:22px;margin-bottom:20px}.ts-services-page .tp-service-content p{font-size:13px;line-height:1.65}.ts-services-page .ts-mobile-service-stage .tp-service-content h2{height:auto;min-height:54px;margin-bottom:16px;display:flex;align-items:center}.ts-services-page .tp-service-panel{scroll-margin-top:85px}
+}

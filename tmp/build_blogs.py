@@ -1,0 +1,38 @@
+from copy import deepcopy
+from html import escape
+from lxml import html, etree
+
+def build(ROOT):
+ template=html.parse(str(ROOT/'blogs.html')).getroot()
+ posts=[
+ ('planning-your-first-digital-product','Product development','Planning your first digital product','Start with the problem, define the essential user journey and keep your first release focused.','startup',[
+ ('Start with a specific problem','A product idea becomes easier to evaluate when it describes a real problem for a specific group of people. Write down who experiences the problem, how they handle it today and what would make the experience better. Avoid starting with a long feature list. A clear problem statement helps your team make decisions when time and resources are limited.'),
+ ('Map the essential journey','Identify the shortest useful journey through the product. For example, a customer might need to find information, submit a request and receive a confirmation. Sketch those steps before choosing screens or technology. Include the work happening behind the scenes, such as a team member reviewing the request or updating its status.'),
+ ('Define the first release','Separate what the product needs to be useful from what can wait. Give each proposed feature a reason to exist. A smaller release can still provide a complete experience if the main journey works well. Document assumptions and dependencies so the team knows what needs to be confirmed before development.'),
+ ('Agree how progress will be reviewed','Choose practical review points where the team can demonstrate working features and discuss feedback. Keep decisions visible and record changes to scope. Before launch, agree the testing, handover and support arrangements. The goal is a shared understanding of what is being delivered and how the team will evaluate it.')]),
+ ('choosing-a-useful-ai-automation','AI & automation','Choosing a useful AI automation','Find a repeatable workflow, understand its data and decide where human review belongs.','ai',[
+ ('Look for repeatable work','Begin with a task that happens often and has a recognizable input and output. Examples might include organizing incoming requests or preparing a first draft from approved material. Ask how the work is completed today and where delays occur. Automating an unclear process can make its problems harder to understand.'),
+ ('Check the available information','An AI workflow depends on the information it can access. Identify which sources are relevant, who owns them and whether they can be used for the proposed purpose. Consider incomplete, outdated and conflicting information. Decide what the system should do when the input does not provide enough context.'),
+ ('Keep human review intentional','Decide which outputs require a person to check them before an action is taken. Give reviewers useful context and a clear way to correct or reject the output. Higher-impact actions deserve more careful controls. An automation should have defined boundaries rather than unrestricted access to every system.'),
+ ('Evaluate before expanding','Test representative examples and include difficult cases, not only easy ones. Compare the output against criteria your team can explain, such as accuracy, completeness and handling of uncertainty. Start with a limited workflow, monitor its behavior and expand only when the evidence supports the next step.')]),
+ ('designing-a-clearer-user-journey','UI/UX design','Designing a clearer user journey','Make the next action understandable through clear structure, useful feedback and consistent interface patterns.','design',[
+ ('Give each screen a clear purpose','A screen is easier to understand when its main task is obvious. Decide what the user needs to know and what they should be able to do next. Put essential information close to the action it supports. Remove competing elements that distract from the task without helping the user make a decision.'),
+ ('Use familiar patterns consistently','Navigation, forms and buttons should behave consistently throughout a product. Reuse patterns when the task is similar and make differences meaningful. Labels should explain the action in plain language. Consistency reduces the amount of new interface behavior a person has to learn.'),
+ ('Show what happened','People need feedback after they take an action. A form should explain missing information, a saved change should be acknowledged and a loading state should indicate that work is in progress. Include a useful next step when something goes wrong. Avoid messages that leave the user unsure whether their action succeeded.'),
+ ('Test the journey across devices','Review the complete task on small and large screens. Check text size, touch targets, keyboard access and how the layout handles longer content. A prototype can help reveal confusing steps before development. Use what you observe to refine the journey rather than relying only on how a screen looks in isolation.')])]
+ def shell(title,description,filename,markup):
+  page=deepcopy(template);main=page.xpath('//main')[0]
+  for child in list(main):main.remove(child)
+  main.append(html.fromstring(markup))
+  page.xpath('//title')[0].text=title+' | TekScaleUp'
+  for meta in page.xpath('//meta[@name="description"] | //meta[@property="og:description"]'):meta.set('content',description)
+  for meta in page.xpath('//meta[@property="og:url"]'):meta.set('content','https://tekscaleup.com/'+filename)
+  page.xpath('//head')[0].append(etree.Element('link',rel='stylesheet',href='assets/css/blogs.css'))
+  (ROOT/filename).write_text('<!doctype html>\n'+html.tostring(page,encoding='unicode'),encoding='utf-8')
+ cards=''
+ for slug,category,title,intro,asset,sections in posts:
+  cards+=f'<article class="ts-blog-card"><a href="blog-{slug}.html" class="ts-blog-image"><img src="assets/img/services/{asset}-20261013.png" alt="{escape(category)} illustration" loading="lazy"></a><div class="ts-blog-meta"><span>{escape(category)}</span><span>Demo article</span></div><h2><a href="blog-{slug}.html">{escape(title)}</a></h2><p>{escape(intro)}</p><a class="ts-blog-read" href="blog-{slug}.html">Read article <span aria-hidden="true">↗</span></a></article>'
+  body=''.join(f'<section><h2>{escape(h)}</h2><p>{escape(p)}</p></section>' for h,p in sections)
+  related=''.join(f'<a href="blog-{s}.html">{escape(t)} ↗</a>' for s,c,t,*_ in posts if s!=slug)
+  shell(title,intro,'blog-'+slug+'.html',f'<article class="ts-blog-article"><header class="container container-1750"><a class="ts-blog-back" href="blogs.html">↖ All articles</a><div class="ts-blog-meta"><span>{escape(category)}</span><span>Demo article · 2 min read</span></div><h1>{escape(title)}</h1><p class="ts-blog-lead">{escape(intro)}</p><p class="ts-blog-demo">Sample editorial content for preview. Review before publication.</p><img class="ts-blog-cover" src="assets/img/services/{asset}-20261013.png" alt="{escape(category)} illustration"></header><div class="ts-blog-body">{body}<aside><h2>Keep exploring.</h2>{related}<a href="blogs.html">Explore all articles ↗</a></aside></div></article>')
+ shell('Blogs','Explore demo articles on product development, AI automation and UI/UX design.','blogs.html','<section class="ts-blog-listing"><div class="container container-1750"><header><span class="tp-section-subtitle">Ideas &amp; insights</span><h1>Knowledge.<br><span>Put to work.</span></h1><p>Perspectives on building products, applying AI and designing clearer experiences.</p><p class="ts-blog-demo">Three demo articles for preview. Editorial approval pending.</p></header><div class="ts-blog-grid">'+cards+'</div></div></section>')
