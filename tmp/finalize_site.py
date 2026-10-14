@@ -12,7 +12,7 @@ def build(ROOT):
   for node in doc.xpath('//link[@href] | //script[@src]'):
    attr='src' if node.tag=='script' else 'href'
    value=node.get(attr)
-   if value.startswith('assets/') and value.split('?')[0].endswith(('.css','.js')):node.set(attr,value.split('?')[0]+'?v=site-audit-20261013-2')
+   if value.startswith('assets/') and value.split('?')[0].endswith(('.css','.js')):node.set(attr,value.split('?')[0]+'?v=layout-20261014-1')
   title=doc.xpath('//title')[0].text_content()
   for meta in doc.xpath('//meta[@property="og:title"]'):meta.set('content',title)
   for image in doc.xpath('//img[@src]'):

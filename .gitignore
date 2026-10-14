@@ -45,3 +45,4 @@ Thumbs.db
 !/tmp/test_cms.py
 !/tmp/cms_validation.test.mjs
 !/tmp/build_dashboard.py
+!/tmp/layout_preview.py

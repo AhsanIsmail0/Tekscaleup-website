@@ -311,6 +311,8 @@
 	// 18. webgl images hover animation //
 	if ($('.tp--hover-item').length) {
 		let hoverAnimation__do = function (t, n) {
+			if (t.data('ts-hover-ready') || !n[0].naturalWidth) return;
+			t.data('ts-hover-ready', true);
 			let a = new hoverEffect({
 				parent: t.get(0),
 				intensity: t.data("intensity") || void 0,
@@ -321,7 +323,7 @@
 				image1: n.eq(0).attr("src"),
 				image2: n.eq(0).attr("src"),
 				displacementImage: t.data("displacement"),
-				imagesRatio: n[0].height / n[0].width,
+				imagesRatio: n[0].naturalHeight / n[0].naturalWidth,
 				hover: !1
 			});
 			t.closest(".tp--hover-item").on("mouseenter", function () {
@@ -335,7 +337,7 @@
 				let n = $(this);
 				let e = n.find("img");
 				let i = e.eq(0);
-				i[0].complete ? hoverAnimation__do(n, e) : i.on("load", function () {
+				i[0].complete ? hoverAnimation__do(n, e) : i.one("load", function () {
 					hoverAnimation__do(n, e)
 				})
 			})

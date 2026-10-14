@@ -1,4 +1,13 @@
 /* Content integration only. The original main.css owns the layout and buttons. */
+/* Intrinsic width/height reserve a ratio; CSS must scale both dimensions together. */
+img { height: auto; }
+#services .tp-service-thumb { overflow: hidden; }
+#services .tp-service-thumb img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; background: #15171b; }
+.ts-project-grid .tp-project-thumb .tp--hover-img { display: block; position: relative; aspect-ratio: 1260 / 710; overflow: hidden; }
+.ts-project-grid .tp-project-thumb img { display: block; width: 100%; height: auto; aspect-ratio: 1260 / 710; object-fit: cover; }
+.ts-project-grid .ts-native-project-image canvas { display: none; }
+.ts-project-grid .ts-native-project-image img { opacity: 1 !important; visibility: visible !important; transition: transform .6s ease; }
+@media(hover:hover) and (prefers-reduced-motion:no-preference) { .ts-project-grid .tp-project-item:hover .ts-native-project-image img { transform: scale(1.025); } }
 /* Presence uses the same constructed lines, type weight and blue-green hierarchy as the hero. */
 .ts-global-presence { border-top: 1px solid #ffffff25; }
 #global-presence .ts-map-heading { margin-bottom: 28px; }
